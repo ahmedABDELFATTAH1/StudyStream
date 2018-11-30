@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LoginLayout">
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/app_icon" />
+
+            <Button
+                android:id="@+id/signupmainbtn"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:onClick="signmain"
+                android:text="Sign Up" />
+
+            <Button
+                android:id="@+id/loginmainbtn"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="logmain"
+                android:text="Log in" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

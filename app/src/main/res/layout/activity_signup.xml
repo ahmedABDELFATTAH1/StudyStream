@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LoginLayout">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/app_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center">
+
+                <RadioButton
+                    android:id="@+id/Doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="30dp"
+                    android:text="Doctor" />
+
+                <RadioButton
+                    android:id="@+id/Student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student" />
+
+            </RadioGroup>
+
+
+            <EditText
+                android:id="@+id/emailtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="7dp"
+                android:gravity="center"
+                android:hint="Email"
+                android:maxLines="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp">
+
+                <EditText
+                    android:id="@+id/fnametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="First Name"
+                    android:maxLines="1" />
+
+                <EditText
+                    android:id="@+id/snametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="Last Name"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/passtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:hint="Password"
+                android:maxLines="1" />
+
+            <EditText
+                android:id="@+id/repasstxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:hint="Re-enter Password"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signupbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:onClick="signupevent"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Sign Up" />
+
+
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
