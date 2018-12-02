@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/mytoolbarsignup"
+        layout="@layout/app_bar_layout" />
+
     <RelativeLayout
+        android:id="@+id/LoginLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/LoginLayout">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="56dp">
 
         <ImageView
             android:layout_width="100dp"
@@ -18,18 +29,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingTop="50dp">
 
 
             <RadioGroup
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/Doctor"
@@ -61,8 +72,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp">
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
 
                 <EditText
                     android:id="@+id/fnametxt"
@@ -123,7 +134,6 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="Sign Up" />
-
 
 
     </RelativeLayout>

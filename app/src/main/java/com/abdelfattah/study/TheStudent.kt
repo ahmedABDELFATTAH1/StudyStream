@@ -7,21 +7,20 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_the_start.*
+import kotlinx.android.synthetic.main.activity_the_student.*
 
-class TheStart : AppCompatActivity() {
+class TheStudent : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_the_start)
-       setSupportActionBar(mytoolbarstart as Toolbar)
-       var bundle=intent.extras
-       var Fname= bundle.get("Fname")
-        supportActionBar!!.title="Welcome Doctor "+Fname
+        setContentView(R.layout.activity_the_student)
+        setSupportActionBar(mytoolbarstudent as Toolbar)
+        var bundle=intent.extras
+        var Fname= bundle.get("Fname")
+        supportActionBar!!.title="Welcome Student "+Fname
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-         super.onCreateOptionsMenu(menu)
+        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.mainmenu,menu)
 
         return true
@@ -31,8 +30,8 @@ class TheStart : AppCompatActivity() {
         super.onOptionsItemSelected(item)
         if(item!!.itemId==R.id.logoutbtn)
         {
-            Toast.makeText(this,"Hantala3k barra 7ader shoukrn ya mo7trm",Toast.LENGTH_LONG).show()
-            var intent=Intent(this,MainActivity::class.java)
+            Toast.makeText(this,"Hantala3k barra 7ader shoukrn ya mo7trm", Toast.LENGTH_LONG).show()
+            var intent= Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
 

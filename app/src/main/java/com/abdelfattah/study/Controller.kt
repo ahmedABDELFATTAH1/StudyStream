@@ -36,6 +36,24 @@ class Controller {
         var Cursor=db!!.Select(query,Argument)
         return Cursor.count>0
     }
+    fun checkkind(email: String):Boolean
+    {
+        var query="Select * from "+ Doctor.Table_Name+" where "+Doctor.Column_ID +"=? "
+        var Argument= arrayOf(email)
+        var Cursor=db!!.Select(query,Argument)
+        return Cursor.count>0
+    }
+    fun firstname(email: String):String
+    {
+
+        var query="Select "+UserEntry.Column_FirstName+" from "+UserEntry.Table_Name +" where "+UserEntry.Column_ID +" =? "
+        var Argument= arrayOf(email)
+        var Cursor=db!!.Select(query,Argument)
+        Cursor.moveToFirst()
+       var Fname= Cursor.getString(0)
+        return Fname
+    }
+
     fun insertuser(isDoctor:Boolean,Email:String,Firstname:String,Secondname:String,pass:String):Boolean
     {
         var content=ContentValues()

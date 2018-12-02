@@ -1,9 +1,12 @@
 package com.abdelfattah.study
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class signup : AppCompatActivity() {
@@ -12,7 +15,8 @@ class signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
         controller=Controller(this)
-
+        setSupportActionBar(mytoolbarsignup as Toolbar)
+        supportActionBar!!.title="SIGN UP"
     }
 
     fun signupevent(view:View)
@@ -38,7 +42,20 @@ class signup : AppCompatActivity() {
         if(success)
         {
 
-            Toast.makeText(this,"el7amd llah",Toast.LENGTH_SHORT).show()
+            if(Doctor)
+            {
+
+                var intent = Intent(this, TheStart::class.java)
+                intent!!.putExtra("Fname",firstname)
+                startActivity(intent)
+            }
+            else{
+
+
+
+
+            }
+
         }
         else
         {
