@@ -27,25 +27,30 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
             return
         }
-        Toast.makeText(this, "A7la Mesa 3la El so7ab", Toast.LENGTH_LONG).show()
+
         var IsThere = controller!!.checkuser(email, pass)
         if (IsThere) {
 
            var isdoctor=controller!!.checkkind(email)
-          var firstnaeme=controller!!.firstname(email)
+          var UserCursor=controller!!. UserData(email)
             if(isdoctor)
            {
+               Doctorinfo.email=UserCursor.getString(0)
+               Doctorinfo.password=UserCursor.getString(1)
+               Doctorinfo.Fname=UserCursor.getString(2)
+               Doctorinfo.Secondname=UserCursor.getString(3)
                 Toast.makeText(this, "A7la Mesa 3la El so7ab", Toast.LENGTH_LONG).show()
                 var intent = Intent(this, TheStart::class.java)
-               intent!!.putExtra("Fname",firstnaeme)
                 startActivity(intent)
 
            }
            else{
-               var intent = Intent(this, TheStudent::class.java)
-                intent!!.putExtra("Fname",firstnaeme)
+                Studentinfo.Studentemail=UserCursor.getString(0)
+                Studentinfo.password=UserCursor.getString(1)
+                Studentinfo.StudentFname=UserCursor.getString(2)
+                Studentinfo.Secondname=UserCursor.getString(3)
+                var intent = Intent(this, TheStudent::class.java)
                startActivity(intent)
-              //  Toast.makeText(this,"Student a3333",Toast.LENGTH_SHORT).show()
           }
 
 

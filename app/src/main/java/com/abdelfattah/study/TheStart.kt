@@ -16,8 +16,8 @@ class TheStart : AppCompatActivity() {
         setContentView(R.layout.activity_the_start)
        setSupportActionBar(mytoolbarstart as Toolbar)
        var bundle=intent.extras
-       var Fname= bundle.get("Fname")
-        supportActionBar!!.title="Welcome Doctor "+Fname
+
+        supportActionBar!!.title="Welcome Doctor "+Doctorinfo.Fname
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

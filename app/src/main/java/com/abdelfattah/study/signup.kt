@@ -44,15 +44,20 @@ class signup : AppCompatActivity() {
 
             if(Doctor)
             {
-
+                Doctorinfo.email= email
+                Doctorinfo.Fname=firstname
+                Doctorinfo.password=pass
+                Doctorinfo.Secondname=secondname
                 var intent = Intent(this, TheStart::class.java)
-                intent!!.putExtra("Fname",firstname)
                 startActivity(intent)
             }
             else{
-
-
-
+                Studentinfo.Studentemail= email
+                Studentinfo.StudentFname=firstname
+                Studentinfo.password=pass
+                Studentinfo.Secondname=secondname
+                var intent = Intent(this, TheStudent::class.java)
+                startActivity(intent)
 
             }
 

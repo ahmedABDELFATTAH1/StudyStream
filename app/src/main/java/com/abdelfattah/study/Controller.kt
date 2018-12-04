@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import android.view.View
+import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.data.DBHelper
 import com.abdelfattah.study.data.StudyStreamContract
 import com.abdelfattah.study.data.StudyStreamContract.*
@@ -43,17 +44,15 @@ class Controller {
         var Cursor=db!!.Select(query,Argument)
         return Cursor.count>0
     }
-    fun firstname(email: String):String
+    fun UserData(email: String):Cursor
     {
 
-        var query="Select "+UserEntry.Column_FirstName+" from "+UserEntry.Table_Name +" where "+UserEntry.Column_ID +" =? "
+        var query="Select * from "+UserEntry.Table_Name +" where "+UserEntry.Column_ID +" =? "
         var Argument= arrayOf(email)
         var Cursor=db!!.Select(query,Argument)
         Cursor.moveToFirst()
-       var Fname= Cursor.getString(0)
-        return Fname
+        return Cursor
     }
-
     fun insertuser(isDoctor:Boolean,Email:String,Firstname:String,Secondname:String,pass:String):Boolean
     {
         var content=ContentValues()
@@ -88,6 +87,14 @@ class Controller {
         return  true
 
 
+    }
+    fun JoindedCourses(studentemail:String):Cursor
+    {
+        var listofcourses=ArrayList<CourseStudent>()
+        var query="Select * From "+STUD_COURSE.Table_Name+" , "+Course.Table_Name+" Where "+STUD_COURSE.Column_Stud_ID+" =? and "+Course.Column_Code+" =? "
+        var argument= arrayOf(studentemail,STUD_COURSE.Column_Course_Code)
+        var cursor=db!!.Select(query,argument)
+        return cursor
     }
 
 
