@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ctitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coursetitle" />
+
+    <TextView
+        android:id="@+id/cdisc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CourseDisc" />
+
+    <TextView
+        android:id="@+id/ccode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CourseCode" />
+
+    <TextView
+        android:id="@+id/cpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CoursePass" />
+
+</LinearLayout>

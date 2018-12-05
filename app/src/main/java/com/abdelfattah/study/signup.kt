@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_login.*
+import com.abdelfattah.study.data.Doctorinfo
+import com.abdelfattah.study.data.Studentinfo
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class signup : AppCompatActivity() {
@@ -48,7 +49,7 @@ class signup : AppCompatActivity() {
                 Doctorinfo.Fname=firstname
                 Doctorinfo.password=pass
                 Doctorinfo.Secondname=secondname
-                var intent = Intent(this, TheStart::class.java)
+                var intent = Intent(this, TheDoctor::class.java)
                 startActivity(intent)
             }
             else{

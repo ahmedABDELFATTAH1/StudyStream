@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".signup" />
-        <activity android:name=".TheStart" />
-        <activity android:name=".TheStudent"></activity>
+        <activity android:name=".TheDoctor" />
+        <activity android:name=".TheStudent" />
+        <activity android:name=".JoinCourse" />
+        <activity android:name=".AddCourse"></activity>
     </application>
 
 </manifest>

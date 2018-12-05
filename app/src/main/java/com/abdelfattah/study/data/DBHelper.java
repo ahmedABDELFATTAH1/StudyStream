@@ -51,7 +51,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Course.Column_Password + " INTEGER NOT NULL ,"
                 + Course.Column_Title + " TEXT NOT NULL ,"
                 + Course.Column_Description + " TEXT NOT NULL ,"
-                + Course.Column_Doc_ID + " TEXT NOT NULL )";
+                + Course.Column_Doc_ID + " TEXT NOT NULL ,"
+                + " FOREIGN KEY (" + Course.Column_Doc_ID + ") REFERENCES " + Doctor.Table_Name
+                + " ) ";
 
         db.execSQL(SQL_CREATE_Course);
 

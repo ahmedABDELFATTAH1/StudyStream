@@ -6,10 +6,16 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.Toast
 import com.abdelfattah.study.data.CourseStudent
+import com.abdelfattah.study.data.Studentinfo
 import com.abdelfattah.study.data.StudyStreamContract.*
 import kotlinx.android.synthetic.main.activity_the_student.*
+import kotlinx.android.synthetic.main.scourseticket.view.*
+
 class TheStudent : AppCompatActivity() {
     var ListOfCourses:ArrayList<CourseStudent>?=null
     var controller:Controller?=null
@@ -19,16 +25,25 @@ class TheStudent : AppCompatActivity() {
         ListOfCourses=ArrayList()
         controller= Controller(this)
         setSupportActionBar(mytoolbarstudent as Toolbar)
-
-        supportActionBar!!.title="Welcome Student "+Studentinfo.StudentFname
+        supportActionBar!!.title="Welcome Student "+ Studentinfo.StudentFname
+        getCourse()
+        var lsitadpter=CourseAdabterlist()
+        SCourseList.adapter=lsitadpter
     }
+    fun JoinEvent(view: View)
+    {
+        var intent=Intent(this,JoinCourse::class.java)
+        startActivity(intent)
 
+    }
     fun getCourse()
     {
         var cursor=controller!!.JoindedCourses(Studentinfo.Studentemail!!)
         var Isnotempty:Boolean=cursor.moveToFirst()
+      //  Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
         while (Isnotempty)
         {
+            Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
             var Courscode=cursor.getInt(cursor.getColumnIndex(Course.Column_Code))
             var Coursetitle=cursor.getString(cursor.getColumnIndex(Course.Column_Title))
             var CourseDesc=cursor.getString(cursor.getColumnIndex(Course.Column_Description))
@@ -37,9 +52,6 @@ class TheStudent : AppCompatActivity() {
             ListOfCourses!!.add(CourseStudent(Courscode,Coursetitle,CourseDesc,DoctorID,Coursepass))
             Isnotempty=cursor.moveToNext()
         }
-
-
-
 
     }
 
@@ -66,5 +78,36 @@ class TheStudent : AppCompatActivity() {
         }
 
         return true
+    }
+
+
+    inner class CourseAdabterlist():BaseAdapter()
+    {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                var myview=layoutInflater.inflate(R.layout.scourseticket,null)
+                var currentcourse=ListOfCourses!![position]
+                myview.coursetitle.text=currentcourse.Title
+                myview.coursedisc.text= currentcourse.Desc
+                myview.doctorid.text=currentcourse.Doctor_ID
+            myview.setOnClickListener {
+                Toast.makeText(applicationContext,position.toString(), Toast.LENGTH_LONG).show()
+            }
+                return myview
+        }
+
+        override fun getItem(position: Int): Any {
+           return ListOfCourses!![position]
+        }
+
+        override fun getItemId(position: Int): Long {
+           return position.toLong()
+        }
+
+        override fun getCount(): Int {
+           return ListOfCourses!!.size
+        }
+
+
     }
 }

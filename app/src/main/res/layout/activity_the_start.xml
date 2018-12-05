@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TheStart">
+    tools:context=".TheDoctor">
 
     <include
         android:id="@+id/mytoolbarstart"
         layout="@layout/app_bar_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/DCourseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/AddCbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:onClick="ADDCOURSEEVENT"
+        android:text="AddCourse" />
 
 </LinearLayout>

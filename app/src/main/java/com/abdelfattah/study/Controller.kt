@@ -14,13 +14,11 @@ import com.abdelfattah.study.data.StudyStreamContract.*
 
 class Controller {
     var db:DBHelper?=null
-    var readdata:SQLiteDatabase?=null
-    var writedata:SQLiteDatabase?=null
+
     constructor(context:Context)
     {
         db= DBHelper(context)
-        readdata=db!!.readableDatabase
-        writedata=db!!.writableDatabase
+
 
     }
     fun checkuser(email:String,pass:String):Boolean
@@ -90,12 +88,22 @@ class Controller {
     }
     fun JoindedCourses(studentemail:String):Cursor
     {
-        var listofcourses=ArrayList<CourseStudent>()
-        var query="Select * From "+STUD_COURSE.Table_Name+" , "+Course.Table_Name+" Where "+STUD_COURSE.Column_Stud_ID+" =? and "+Course.Column_Code+" =? "
-        var argument= arrayOf(studentemail,STUD_COURSE.Column_Course_Code)
+
+        var query="Select * From "+STUD_COURSE.Table_Name+" , "+Course.Table_Name+" Where "+STUD_COURSE.Column_Stud_ID+" =? and "+Course.Column_Code+" = "+STUD_COURSE.Column_Course_Code   //jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+        var argument= arrayOf(studentemail)
         var cursor=db!!.Select(query,argument)
         return cursor
     }
+
+    fun MadeCourses(Doctorid:String):Cursor
+    {
+        var query="Select * from "+Course.Table_Name+" where "+Course.Column_Doc_ID+" =? "
+        var Argument= arrayOf(Doctorid)
+        var cursor=db!!.Select(query,Argument)
+        return cursor
+
+    }
+
 
 
 

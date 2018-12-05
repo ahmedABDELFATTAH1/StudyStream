@@ -1,4 +1,4 @@
-package com.abdelfattah.study
+package com.abdelfattah.study.data
 
 object Studentinfo {
     var Studentemail:String?="Unknown"

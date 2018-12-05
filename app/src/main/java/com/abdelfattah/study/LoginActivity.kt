@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
+import com.abdelfattah.study.data.Doctorinfo
+import com.abdelfattah.study.data.Studentinfo
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_the_start.*
 
 class LoginActivity : AppCompatActivity() {
     var controller:Controller?=null
@@ -40,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                Doctorinfo.Fname=UserCursor.getString(2)
                Doctorinfo.Secondname=UserCursor.getString(3)
                 Toast.makeText(this, "A7la Mesa 3la El so7ab", Toast.LENGTH_LONG).show()
-                var intent = Intent(this, TheStart::class.java)
+                var intent = Intent(this, TheDoctor::class.java)
                 startActivity(intent)
 
            }
