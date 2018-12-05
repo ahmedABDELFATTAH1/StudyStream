@@ -29,6 +29,7 @@ class TheStudent : AppCompatActivity() {
         getCourse()
         var lsitadpter=CourseAdabterlist()
         SCourseList.adapter=lsitadpter
+        lsitadpter.notifyDataSetChanged()
     }
     fun JoinEvent(view: View)
     {
@@ -43,7 +44,7 @@ class TheStudent : AppCompatActivity() {
       //  Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
         while (Isnotempty)
         {
-            Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
             var Courscode=cursor.getInt(cursor.getColumnIndex(Course.Column_Code))
             var Coursetitle=cursor.getString(cursor.getColumnIndex(Course.Column_Title))
             var CourseDesc=cursor.getString(cursor.getColumnIndex(Course.Column_Description))

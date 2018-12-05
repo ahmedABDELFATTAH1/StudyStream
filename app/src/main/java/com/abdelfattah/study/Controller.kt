@@ -9,6 +9,7 @@ import android.provider.BaseColumns
 import android.view.View
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.data.DBHelper
+import com.abdelfattah.study.data.Studentinfo
 import com.abdelfattah.study.data.StudyStreamContract
 import com.abdelfattah.study.data.StudyStreamContract.*
 
@@ -104,6 +105,36 @@ class Controller {
 
     }
 
+    fun IsUsedCourseCode(CourseCode:String):Boolean
+    {
+        var query="Select * from "+Course.Table_Name+" where "+Course.Column_Code+" =? "
+        var Argument= arrayOf(CourseCode)
+        var cursor=db!!.Select(query,Argument)
+        return cursor.count>0
+
+
+
+    }
+    fun InsertNewCourse(tablename:String,contentval:ContentValues):Boolean
+    {
+      return  db!!.insert(tablename,contentval)
+    }
+
+    fun FindCourse(coursecode:String,coursevalues:String):Boolean
+    {
+      var query="Select * from "+Course.Table_Name+" where "+Course.Column_Code+" =? and "+ Course.Column_Password+" =? "
+        var Argument= arrayOf(coursecode,coursevalues)
+       var cursor= db!!.Select(query,Argument)
+        return cursor.count>0
+    }
+    fun joincourse(coursecode:String):Boolean
+      {
+          var contentvalue=ContentValues()
+          contentvalue.put(STUD_COURSE.Column_Course_Code,coursecode)
+          contentvalue.put(STUD_COURSE.Column_Stud_ID,Studentinfo.Studentemail)
+          return  db!!.insert(STUD_COURSE.Table_Name,contentvalue)
+
+      }
 
 
 

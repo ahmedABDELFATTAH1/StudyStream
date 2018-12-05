@@ -31,6 +31,7 @@ class TheDoctor : AppCompatActivity() {
         supportActionBar!!.title="Welcome Doctor "+ Doctorinfo.Fname
         var adapter=CourseAdabterlist()
         DCourseList.adapter=adapter
+        adapter.notifyDataSetChanged()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
          super.onCreateOptionsMenu(menu)
@@ -38,6 +39,7 @@ class TheDoctor : AppCompatActivity() {
 
         return true
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -56,10 +58,10 @@ fun GetMadeCourses()
 {
     var cursor=controller!!.MadeCourses(Doctorinfo.email!!)
     var Isnotempty:Boolean=cursor.moveToFirst()
-      Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
+   //   Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
     while (Isnotempty)
     {
-        Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
+    //    Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
         var Courscode=cursor.getInt(cursor.getColumnIndex(StudyStreamContract.Course.Column_Code))
         var Coursetitle=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Course.Column_Title))
         var CourseDesc=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Course.Column_Description))
