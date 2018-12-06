@@ -7,10 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import android.view.View
-import com.abdelfattah.study.data.CourseStudent
-import com.abdelfattah.study.data.DBHelper
-import com.abdelfattah.study.data.Studentinfo
-import com.abdelfattah.study.data.StudyStreamContract
+import com.abdelfattah.study.data.*
 import com.abdelfattah.study.data.StudyStreamContract.*
 
 class Controller {
@@ -136,6 +133,21 @@ class Controller {
 
       }
 
+    fun updateBio(Bio:String):Boolean
+    {
+       var  contentval=ContentValues()
+       contentval.put(Doctor.Column_BIO,Bio)
+       return db!!.update(Doctor.Table_Name,contentval, arrayOf(Doctorinfo.email),Doctor.Column_ID+" =? ")
+
+    }
+   fun  getBio():String
+   {
+       var query ="Select "+Doctor.Column_BIO+" From "+Doctor.Table_Name+" Where "+Doctor.Column_ID+" =? "
+       var Argument= arrayOf(Doctorinfo.email)
+       var cursor=db!!.Select(query,Argument)
+       cursor.moveToFirst()
+       return cursor.getString(0)
+   }
 
 
 }

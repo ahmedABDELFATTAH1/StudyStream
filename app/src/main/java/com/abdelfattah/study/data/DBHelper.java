@@ -169,6 +169,12 @@ public class DBHelper extends SQLiteOpenHelper {
        Long success= db.insert(tablename,null,content);
        return success!=-1;
     }
+    public Boolean update(String tablename,ContentValues contentValues,String Argument[],String whreclause)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+       int NumberOfRowAffected= db.update(tablename, contentValues, whreclause, Argument);
+       return NumberOfRowAffected!=0;
+    }
 
 }
 

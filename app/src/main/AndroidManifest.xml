@@ -26,7 +26,8 @@
         <activity android:name=".TheDoctor" />
         <activity android:name=".TheStudent" />
         <activity android:name=".JoinCourse" />
-        <activity android:name=".AddCourse"></activity>
+        <activity android:name=".AddCourse" />
+        <activity android:name=".AddBio"></activity>
     </application>
 
 </manifest>

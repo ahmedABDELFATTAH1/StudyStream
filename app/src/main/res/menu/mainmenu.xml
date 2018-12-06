@@ -5,6 +5,4 @@
     <item
         android:id="@+id/logoutbtn"
         android:title="logout" />
-    <item android:title="Item" />
-    <item android:title="Item" />
 </menu>

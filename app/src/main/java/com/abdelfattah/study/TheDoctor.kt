@@ -28,6 +28,7 @@ class TheDoctor : AppCompatActivity() {
         ListOfMadeCourses=ArrayList()
         controller= Controller(this)
         GetMadeCourses()
+        GetBio()
         supportActionBar!!.title="Welcome Doctor "+ Doctorinfo.Fname
         var adapter=CourseAdabterlist()
         DCourseList.adapter=adapter
@@ -39,7 +40,11 @@ class TheDoctor : AppCompatActivity() {
 
         return true
     }
+   fun GetBio()
+{
+    BioText.text= controller!!.getBio()
 
+}
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -74,6 +79,12 @@ fun GetMadeCourses()
 
 
 }
+    fun EditBioEvent(view:View)
+    {
+
+      var intent =Intent(this,AddBio::class.java)
+        startActivity(intent)
+    }
 
 fun ADDCOURSEEVENT(view: View)
 {
