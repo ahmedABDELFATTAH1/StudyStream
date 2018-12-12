@@ -5,28 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".COURSE.TheDoctor">
+    tools:context=".Questions.QuestionsDoctor">
 
     <include
-        android:id="@+id/mytoolbarstudent"
+        android:id="@+id/mytoolbardoctorstudent"
         layout="@layout/app_bar_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ListView
-        android:id="@+id/SCourseList"
-        android:layout_width="match_parent"
+        android:id="@+id/DQList"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </ListView>
-
-    <Button
-        android:id="@+id/joinCbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:onClick="JoinEvent"
-        android:text="Join Course" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 
 </LinearLayout>

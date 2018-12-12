@@ -4,42 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".COURSE.JoinCourse">
+    tools:context=".Questions.AddQuestion">
 
     <EditText
-        android:id="@+id/jcoursecodetext"
-        android:layout_width="wrap_content"
+        android:id="@+id/Qaddtitle"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="CourseCode"
+        android:hint="addtitle"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/jcoursepassword"
+        android:id="@+id/Qaddcontent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="112dp"
         android:ems="10"
-        android:hint="CoursePassord"
+        android:hint="addcontent"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jcoursecodetext" />
+        app:layout_constraintTop_toBottomOf="@+id/Qaddtitle" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
-        android:onClick="JoinCbtn"
-        android:text="JoinCourse"
+        android:onClick="AddQuestionEvent"
+        android:text="AddQuestion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jcoursepassword" />
+        app:layout_constraintTop_toBottomOf="@+id/Qaddcontent" />
 </android.support.constraint.ConstraintLayout>

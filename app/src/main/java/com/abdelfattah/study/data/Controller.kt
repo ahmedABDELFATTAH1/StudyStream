@@ -1,14 +1,17 @@
-package com.abdelfattah.study
+package com.abdelfattah.study.data
 
-import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
-import android.view.View
+import com.abdelfattah.study.LoginSignUp.Doctorinfo
+import com.abdelfattah.study.LoginSignUp.Studentinfo
+import com.abdelfattah.study.Questions.QuestionObject
 import com.abdelfattah.study.data.*
 import com.abdelfattah.study.data.StudyStreamContract.*
+import java.util.*
+import com.abdelfattah.study.data.StudyStreamContract.Announcements
+
+
 
 class Controller {
     var db:DBHelper?=null
@@ -128,7 +131,7 @@ class Controller {
       {
           var contentvalue=ContentValues()
           contentvalue.put(STUD_COURSE.Column_Course_Code,coursecode)
-          contentvalue.put(STUD_COURSE.Column_Stud_ID,Studentinfo.Studentemail)
+          contentvalue.put(STUD_COURSE.Column_Stud_ID, Studentinfo.Studentemail)
           return  db!!.insert(STUD_COURSE.Table_Name,contentvalue)
 
       }
@@ -145,9 +148,47 @@ class Controller {
        var query ="Select "+Doctor.Column_BIO+" From "+Doctor.Table_Name+" Where "+Doctor.Column_ID+" =? "
        var Argument= arrayOf(Doctorinfo.email)
        var cursor=db!!.Select(query,Argument)
-       cursor.moveToFirst()
+     var tru=  cursor.moveToFirst()
+       if(tru)
        return cursor.getString(0)
+       else
+           return "You can add Bio here"
    }
+    fun insertQuestion(lessonnum:Int,Coursenum:Int,StudentId:String,datee:Date,title:String,content:String,Questionnym:Int):Boolean
+    {
+        var contentvalue=ContentValues()
+        contentvalue.put(Questions.Column_Lesson_Num,lessonnum)
+        contentvalue.put(Questions.Column_Course_Code,Coursenum)
+        contentvalue.put(Questions.Column_Stud_ID,StudentId)
+        contentvalue.put(Questions.Column_Date,datee.toString())
+        contentvalue.put(Questions.Column_Title,title)
+        contentvalue.put(Questions.Column_Content,content)
+        contentvalue.put(Questions.Column_Question_Num,Questionnym)
+        return db!!.insert(Questions.Table_Name,contentvalue)
+    }
+
+    fun getQuestion(lesson_id:Int,Coursid:Int):Cursor
+    {
+        var query="Select * From "+Questions.Table_Name+" Where "+Questions.Column_Lesson_Num+" =? and "+Questions.Column_Course_Code+" =? "
+        var Argument= arrayOf(lesson_id.toString(),Coursid.toString())
+       return db!!.Select(query,Argument)
+    }
+
+    fun NewQuestionID(CourseCode: Int,Lessonnumber:Int): Int {
+        // Select Max(Announcement_Number) from Announcements
+        val query = ("select max( " + Questions.Column_Question_Num
+                + " ) from " + Questions.Table_Name + " Where " + Questions.Column_Course_Code + " = ? and "+Questions.Column_Lesson_Num+" =?")
+        val arguments = arrayOf(CourseCode.toString(),Lessonnumber.toString())
+
+        val mCount = db!!.Select(query, arguments)
+        mCount.moveToFirst()
+
+        val maxID = mCount.getInt(0)
+
+        mCount.close()
+
+        return maxID + 1
+    }
 
 
 }

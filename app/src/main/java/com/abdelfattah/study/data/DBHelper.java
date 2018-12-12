@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import com.abdelfattah.study.data.StudyStreamContract.*;
 
 
@@ -95,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_Questions = "CREATE TABLE " + Questions.Table_Name + "( "
                 + Questions.Column_Course_Code + " INTEGER  NOT NULL , "
-                + Questions.Column_Question_Num + " INTEGER NOT NULL , "
+                + Questions.Column_Question_Num + " INTEGER NOT NULL ,"
                 + Questions.Column_Lesson_Num + " INTEGER NOT NULL ,"
                 + Questions.Column_Stud_ID + " TEXT NOT NULL,"
                 + Questions.Column_Title + " TEXT NOT NULL ,"

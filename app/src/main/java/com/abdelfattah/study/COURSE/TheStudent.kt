@@ -1,4 +1,4 @@
-package com.abdelfattah.study
+package com.abdelfattah.study.COURSE
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -11,14 +11,18 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import com.abdelfattah.study.data.CourseStudent
-import com.abdelfattah.study.data.Studentinfo
+import com.abdelfattah.study.LoginSignUp.Studentinfo
+import com.abdelfattah.study.LoginSignUp.MainActivity
+import com.abdelfattah.study.Questions.QuestionStudent
+import com.abdelfattah.study.R
+import com.abdelfattah.study.data.Controller
 import com.abdelfattah.study.data.StudyStreamContract.*
 import kotlinx.android.synthetic.main.activity_the_student.*
 import kotlinx.android.synthetic.main.scourseticket.view.*
 
 class TheStudent : AppCompatActivity() {
     var ListOfCourses:ArrayList<CourseStudent>?=null
-    var controller:Controller?=null
+    var controller: Controller?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_the_student)
@@ -33,7 +37,7 @@ class TheStudent : AppCompatActivity() {
     }
     fun JoinEvent(view: View)
     {
-        var intent=Intent(this,JoinCourse::class.java)
+        var intent=Intent(this, JoinCourse::class.java)
         startActivity(intent)
 
     }
@@ -71,10 +75,10 @@ class TheStudent : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         super.onOptionsItemSelected(item)
-        if(item!!.itemId==R.id.logoutbtn)
+        if(item!!.itemId== R.id.logoutbtn)
         {
             Toast.makeText(this,"Hantala3k barra 7ader shoukrn ya mo7trm", Toast.LENGTH_LONG).show()
-            var intent= Intent(this,MainActivity::class.java)
+            var intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
@@ -93,6 +97,13 @@ class TheStudent : AppCompatActivity() {
                 myview.doctorid.text=currentcourse.Doctor_ID
             myview.setOnClickListener {
                 Toast.makeText(applicationContext,position.toString(), Toast.LENGTH_LONG).show()
+                PickedCourse.Code=currentcourse.Course_Code
+                PickedCourse.password=currentcourse.password
+                PickedCourse.Description=currentcourse.Desc
+                PickedCourse.Doc_id=currentcourse.Doctor_ID
+                PickedCourse.Title=currentcourse.Title
+                var intent=Intent(applicationContext,QuestionStudent::class.java)
+                startActivity(intent)
             }
                 return myview
         }

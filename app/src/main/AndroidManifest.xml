@@ -14,20 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginSignUp.LoginActivity" />
+        <activity android:name=".LoginSignUp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signup" />
-        <activity android:name=".TheDoctor" />
-        <activity android:name=".TheStudent" />
-        <activity android:name=".JoinCourse" />
-        <activity android:name=".AddCourse" />
-        <activity android:name=".AddBio"></activity>
+        <activity android:name=".LoginSignUp.signup" />
+        <activity android:name=".COURSE.TheDoctor" />
+        <activity android:name=".COURSE.TheStudent" />
+        <activity android:name=".COURSE.JoinCourse" />
+        <activity android:name=".COURSE.AddCourse" />
+        <activity android:name=".COURSE.AddBio" />
+        <activity android:name=".Questions.QuestionsDoctor" />
+        <activity android:name=".Questions.QuestionStudent" />
+        <activity android:name=".Questions.AddQuestion" />
+        <activity android:name=".Answers.AddAnswer" />
+        <activity android:name=".data.courseMainMenu"></activity>
     </application>
 
 </manifest>

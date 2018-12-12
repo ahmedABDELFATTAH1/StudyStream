@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCourse">
+    tools:context=".COURSE.AddCourse">
 
     <EditText
         android:id="@+id/CourseCodeText"

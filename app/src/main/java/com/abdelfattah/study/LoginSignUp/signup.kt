@@ -1,4 +1,4 @@
-package com.abdelfattah.study
+package com.abdelfattah.study.LoginSignUp
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -6,16 +6,18 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
-import com.abdelfattah.study.data.Doctorinfo
-import com.abdelfattah.study.data.Studentinfo
+import com.abdelfattah.study.data.Controller
+import com.abdelfattah.study.R
+import com.abdelfattah.study.COURSE.TheDoctor
+import com.abdelfattah.study.COURSE.TheStudent
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class signup : AppCompatActivity() {
-    var controller:Controller?=null
+    var controller: Controller?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        controller=Controller(this)
+        controller= Controller(this)
         setSupportActionBar(mytoolbarsignup as Toolbar)
         supportActionBar!!.title="SIGN UP"
     }

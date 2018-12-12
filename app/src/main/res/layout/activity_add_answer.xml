@@ -4,42 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".COURSE.JoinCourse">
+    >
 
     <EditText
-        android:id="@+id/jcoursecodetext"
-        android:layout_width="wrap_content"
+        android:id="@+id/Aaddtitle"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="CourseCode"
+        android:hint="addtitle"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Aaddcontent" />
+
+    <EditText
+        android:id="@+id/Aaddcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="108dp"
+        android:ems="10"
+        android:hint="addcontent"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/jcoursepassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:ems="10"
-        android:hint="CoursePassord"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jcoursecodetext" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:onClick="JoinCbtn"
-        android:text="JoinCourse"
+        android:layout_marginTop="120dp"
+        android:onClick="AddAnswerEvent"
+        android:text="AddAnswer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jcoursepassword" />
+        app:layout_constraintTop_toBottomOf="@+id/Aaddtitle" />
 </android.support.constraint.ConstraintLayout>
