@@ -3,6 +3,7 @@ package com.abdelfattah.study.data
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import com.abdelfattah.study.Answers.AnswerObject
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.data.StudyStreamContract.*
@@ -169,6 +170,12 @@ class Controller {
         var Argument= arrayOf(lesson_id.toString(),Coursid.toString())
        return db!!.Select(query,Argument)
     }
+    fun getAnswer(lesson_id:Int,Coursid:Int,questionid:Int):Cursor
+    {
+        var query="Select * From "+Answers.Table_Name+" Where "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Course_Code+" =? and "+Answers.Column_Question_Num+" =? "
+        var Argument= arrayOf(lesson_id.toString(),Coursid.toString(),questionid.toString())
+        return db!!.Select(query,Argument)
+    }
 
     fun NewQuestionID(CourseCode: Int,Lessonnumber:Int): Int {
         // Select Max(Announcement_Number) from Announcements
@@ -186,12 +193,42 @@ class Controller {
         return maxID + 1
     }
 
+    fun NewAnswerID(CourseCode: Int,Lessonnumber:Int,questionnumber:Int): Int {
+
+        val query = ("select max( " + Answers.Column_Question_Num
+                + " ) from " + Answers.Table_Name + " Where " + Answers.Column_Course_Code + " = ? and "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Question_Num+" =? ")
+        val arguments = arrayOf(CourseCode.toString(),Lessonnumber.toString(),questionnumber.toString())
+
+        val mCount = db!!.Select(query, arguments)
+        mCount.moveToFirst()
+
+        val maxID = mCount.getInt(0)
+
+        mCount.close()
+
+        return maxID + 1
+    }
+
     fun SelectAllLessons(CourseCode: Int): Cursor {
         //select * from Lesson where Course_Code = course_code
         val query = "Select * from " + Lesson.Table_Name + " where " + Lesson.Column_Course_Code + " =? "
         val Argument = arrayOf(Integer.toString(CourseCode))
         return db!!.Select(query, Argument)
 
+    }
+
+    fun  insertAnswer(title:String,cont:String,Cnum:Int,Lnum:Int,Qnum:Int,useremail:String,datee:Date,Anum:Int):Boolean
+    {
+        var contentvalues=ContentValues()
+        contentvalues.put(Answers.Column_Answer_Num,Anum)
+        contentvalues.put(Answers.Column_Title,title)
+        contentvalues.put(Answers.Column_Content,cont)
+        contentvalues.put(Answers.Column_Course_Code,Cnum)
+        contentvalues.put(Answers.Column_Lesson_Num,Lnum)
+        contentvalues.put(Answers.Column_Question_Num,Qnum)
+        contentvalues.put(Answers.Column_User_ID,useremail)
+        contentvalues.put(Answers.Column_Date,datee.toString())
+        return db!!.insert(Answers.Table_Name,contentvalues)
     }
 
 }

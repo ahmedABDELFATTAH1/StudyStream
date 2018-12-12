@@ -38,6 +38,7 @@
         <activity android:name=".CourseMainMenu.Fragments.ADD.AddMaterials" />
         <activity android:name=".CourseMainMenu.Fragments.ADD.AddLesson" />
         <activity android:name=".CourseMainMenu.Fragments.ADD.AddAnnouncement" />
+        <activity android:name=".Answers.Answers"></activity>
     </application>
 
 </manifest>

@@ -1,10 +1,12 @@
 package com.abdelfattah.study.Questions
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.abdelfattah.study.Answers.Answers
 import com.abdelfattah.study.LESSONS.Pickedlesson
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
@@ -65,6 +67,8 @@ class QuestionsDoctor : AppCompatActivity() {
                 QuestionObject.lessonnume=ListofQuestions!![position].lessonnum
                 QuestionObject.questionnum=ListofQuestions!![position].questionnum
                 QuestionObject.studentid=ListofQuestions!![position].studentid
+                var intent=Intent(baseContext,Answers::class.java)
+                startActivity(intent)
 
             }
             return myview
