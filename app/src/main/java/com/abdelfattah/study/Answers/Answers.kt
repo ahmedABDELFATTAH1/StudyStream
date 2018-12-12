@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Toast
 import com.abdelfattah.study.LESSONS.Pickedlesson
 import com.abdelfattah.study.Questions.QuestionObject
 import com.abdelfattah.study.Questions.Questiondata
@@ -69,8 +70,15 @@ var listOfAnswers:ArrayList<Answerdata>?=null
             myview.contenttext.text=current.conten
             myview.datetext.text=current.TheDate
             myview.useridtext.text=current.Userid
-            myview.setOnClickListener {
+          myview.Upvotebtn.setOnClickListener {
+              Toast.makeText(baseContext,"Upvote",Toast.LENGTH_SHORT).show()
 
+          }
+            myview.downvotebtn.setOnClickListener {
+                Toast.makeText(baseContext,"downvote",Toast.LENGTH_SHORT).show()
+            }
+            myview.setOnClickListener {
+                Toast.makeText(baseContext,"wladawlada",Toast.LENGTH_SHORT).show()
             }
             return myview
         }

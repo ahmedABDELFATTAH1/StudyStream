@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.abdelfattah.study.COURSE.PickedCourse;
 import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddAnnouncement;
+import com.abdelfattah.study.LoginSignUp.Studentinfo;
 import com.abdelfattah.study.R;
 import com.abdelfattah.study.data.Controllerjava;
 import com.abdelfattah.study.data.StudyStreamContract;
@@ -55,6 +56,11 @@ public class Announcement extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View myview= inflater.inflate(R.layout.fragment_announcement,container, false);
+        if(Studentinfo.INSTANCE.getStudentemail()!="Unknown")
+        {
+            Button btn=myview.findViewById(R.id.AddAnnouncment);
+            btn.setVisibility(View.GONE);
+        }
         Button b = (Button)myview.findViewById(R.id.AddAnnouncment);
         b.setOnClickListener(new View.OnClickListener() {
             @Override

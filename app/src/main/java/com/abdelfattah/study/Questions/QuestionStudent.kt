@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import com.abdelfattah.study.Answers.Answers
 import com.abdelfattah.study.LESSONS.Pickedlesson
+import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
 import com.abdelfattah.study.data.StudyStreamContract
@@ -27,7 +29,12 @@ class QuestionStudent : AppCompatActivity() {
         var adapter=QuestionsAdabterlist()
         SQList.adapter=adapter
         adapter.notifyDataSetChanged()
+        if(Doctorinfo.email!="Unknown")
+        {
+            AddQuestionbtn.visibility=View.GONE
+        }
     }
+
 
     fun AddQuestionEvent(view: View)
     {
@@ -71,6 +78,8 @@ class QuestionStudent : AppCompatActivity() {
                 QuestionObject.lessonnume=ListofQuestions!![position].lessonnum
                 QuestionObject.questionnum=ListofQuestions!![position].questionnum
                 QuestionObject.studentid=ListofQuestions!![position].studentid
+                var intent=Intent(baseContext, Answers::class.java)
+                startActivity(intent)
             }
             return myview
         }
@@ -89,9 +98,5 @@ class QuestionStudent : AppCompatActivity() {
 
 
     }
-
-
-
-
 
 }

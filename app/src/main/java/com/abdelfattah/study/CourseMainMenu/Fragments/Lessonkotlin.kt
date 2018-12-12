@@ -15,7 +15,9 @@ import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddAnnouncement
 import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddLesson
 import com.abdelfattah.study.LESSONS.Lessonsdata
 import com.abdelfattah.study.LESSONS.Pickedlesson
+import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.Questions.QuestionObject
+import com.abdelfattah.study.Questions.QuestionStudent
 import com.abdelfattah.study.Questions.QuestionsDoctor
 
 import com.abdelfattah.study.R
@@ -46,6 +48,9 @@ class Lessonkotlin : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val myview = inflater.inflate(R.layout.fragment_lessons, container, false)
+        if (Studentinfo.Studentemail !== "Unknown") {
+            myview.AddLesson.visibility = View.GONE
+        }
         var adapter=LessonAdabterlist()
         myview.LessontList.adapter=adapter
         adapter.notifyDataSetChanged()
@@ -109,11 +114,12 @@ class Lessonkotlin : Fragment() {
             var myview=layoutInflater.inflate(R.layout.lessonticket,null)
             var currentlesson= ListofLessons!![position]
             myview.LessonTitletxt.text=currentlesson.Title
+
             myview.setOnClickListener {
                Pickedlesson.Course_code=currentlesson.Course_code
                 Pickedlesson.Lesson_num=currentlesson.Lesson_num
                 Pickedlesson.Title=currentlesson.Title
-                var intent=Intent(context,QuestionsDoctor::class.java)
+                var intent=Intent(context,QuestionStudent::class.java)
                 startActivity(intent)
             }
             return myview

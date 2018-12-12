@@ -20,9 +20,13 @@ class LoginActivity : AppCompatActivity() {
         controller= Controller(this)
         setSupportActionBar(mytoolbarlogin as Toolbar)
         supportActionBar!!.title="LOGIN"
+        Doctorinfo.email="Unknown"
+        Studentinfo.Studentemail="Unknown"
     }
 
     fun loginevent(view:View) {
+        Doctorinfo.email="Unknown"
+        Studentinfo.Studentemail="Unknown"
         val email: String = logintext.text.toString()
         val pass: String = passwordtext.text.toString()
         if(email==""||pass=="")

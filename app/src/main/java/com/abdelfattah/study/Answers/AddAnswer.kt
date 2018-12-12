@@ -28,8 +28,6 @@ class AddAnswer : AppCompatActivity() {
         var cont=Aaddcontent.text.toString()
         var useremai:String=""
         var ansid=controller!!.NewAnswerID(QuestionObject.coursenume,QuestionObject.lessonnume,QuestionObject.questionnum)
-        if(ansid==2)
-            ansid=3
         if(Studentinfo.Studentemail!="Unknown")
         {
             useremai=Studentinfo.Studentemail!!

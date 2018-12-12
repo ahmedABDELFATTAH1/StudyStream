@@ -144,6 +144,35 @@ public class DBHelper extends SQLiteOpenHelper {
                 + ", FOREIGN KEY (" + LESSON_STUD.Column_Stud_ID +") REFERENCES " + Student.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_LESSON_STUD);
+        final String SQL_CREATE_USER_VOTE_QUESTION = "CREATE TABLE " + USER_VOTE_QUESTION.Table_Name
+                + "( " + USER_VOTE_QUESTION.Column_Course_Code + " INTEGER NOT NULL, "
+                + USER_VOTE_QUESTION.Column_Lesson_Num + " INTEGER NOT NULL, "
+                + USER_VOTE_QUESTION.Column_Question_Num+ " INTEGER NOT NULL, "
+                + USER_VOTE_QUESTION.Column_USER_ID + " TEXT NOT NULL ,"
+                + USER_VOTE_QUESTION.Column_Rating + " INTEGER ,"
+                + "PRIMARY KEY (" + USER_VOTE_QUESTION.Column_Course_Code + "," + USER_VOTE_QUESTION.Column_Lesson_Num + "," + USER_VOTE_QUESTION.Column_Question_Num
+                + "," + USER_VOTE_QUESTION.Column_USER_ID +")"
+                + ", FOREIGN KEY (" + USER_VOTE_QUESTION.Column_Course_Code + "," + USER_VOTE_QUESTION.Column_Lesson_Num + "," + USER_VOTE_QUESTION.Column_Question_Num +") REFERENCES "
+                + Questions.Table_Name + "(" + Questions.Column_Course_Code + "," + Questions.Column_Lesson_Num + "," + Questions.Column_Question_Num +  ")"
+                + ", FOREIGN KEY (" + USER_VOTE_QUESTION.Column_USER_ID +") REFERENCES " + UserEntry.Table_Name
+                +  ")";
+        db.execSQL(SQL_CREATE_USER_VOTE_QUESTION);
+
+        final String SQL_CREATE_USER_VOTE_ANSWERS = "CREATE TABLE " + USER_VOTE_ANSWERS.Table_Name
+                + "( " + USER_VOTE_ANSWERS.Column_Course_Code + " INTEGER NOT NULL, "
+                + USER_VOTE_ANSWERS.Column_Lesson_Num + " INTEGER NOT NULL, "
+                + USER_VOTE_ANSWERS.Column_Question_Num+ " INTEGER NOT NULL, "
+                + USER_VOTE_ANSWERS.Column_Answer_Num+ " INTEGER NOT NULL, "
+                + USER_VOTE_ANSWERS.Column_USER_ID + " TEXT NOT NULL ,"
+                + USER_VOTE_ANSWERS.Column_Rating + " INTEGER ,"
+                + "PRIMARY KEY (" + USER_VOTE_ANSWERS.Column_Course_Code + "," + USER_VOTE_ANSWERS.Column_Lesson_Num + "," + USER_VOTE_ANSWERS.Column_Question_Num
+                + "," +USER_VOTE_ANSWERS.Column_Answer_Num + "," + USER_VOTE_ANSWERS.Column_USER_ID +")"
+                + ", FOREIGN KEY (" + USER_VOTE_ANSWERS.Column_Course_Code + "," + USER_VOTE_ANSWERS.Column_Question_Num + "," + USER_VOTE_ANSWERS.Column_Answer_Num +","+ USER_VOTE_ANSWERS.Column_Lesson_Num +") REFERENCES "
+                + Answers.Table_Name + "(" +Answers.Column_Course_Code + "," + Answers.Column_Question_Num + "," + Answers.Column_Answer_Num +","+ Answers.Column_Lesson_Num +  ")"
+                + ", FOREIGN KEY (" + USER_VOTE_ANSWERS.Column_USER_ID +") REFERENCES " + UserEntry.Table_Name
+                +  ")";
+        db.execSQL(SQL_CREATE_USER_VOTE_ANSWERS);
+
 
 
     }

@@ -107,6 +107,23 @@ public final class StudyStreamContract {
         public static final String Column_Stud_ID = "Stud_ID";
         public static final String Column_Lesson_Num = "Lesson_Num";
     }
+    public static class USER_VOTE_QUESTION implements BaseColumns {
+        public static final String Table_Name = "USER_VOTE_QUESTION";
+        public static final String Column_Course_Code = "Course_Code";
+        public static final String Column_Lesson_Num = "Lesson_Number";
+        public static final String Column_Question_Num = "Question_Number";
+        public static final String Column_USER_ID = "USER_ID";
+        public static final String Column_Rating = "Rating";
+    }
 
+    public static class USER_VOTE_ANSWERS implements BaseColumns {
+        public static final String Table_Name = "USER_VOTE_ANSWER";
+        public static final String Column_Course_Code = "Course_Code";
+        public static final String Column_Lesson_Num = "Lesson_Number";
+        public static final String Column_Question_Num = "Question_Number";
+        public static final String Column_Answer_Num = "Answer_Number";
+        public static final String Column_USER_ID = "USER_ID";
+        public static final String Column_Rating = "Rating";
+    }
 }
 

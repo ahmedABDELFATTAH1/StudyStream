@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import com.abdelfattah.study.CourseMainMenu.Fragments.MainCourseDoctor
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.LoginSignUp.MainActivity
@@ -61,11 +62,6 @@ class TheStudent : AppCompatActivity() {
     }
 
 
-
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.mainmenu,menu)
@@ -102,7 +98,7 @@ class TheStudent : AppCompatActivity() {
                 PickedCourse.Description=currentcourse.Desc
                 PickedCourse.Doc_id=currentcourse.Doctor_ID
                 PickedCourse.Title=currentcourse.Title
-                var intent=Intent(applicationContext,QuestionStudent::class.java)
+                var intent=Intent(applicationContext, MainCourseDoctor::class.java)
                 startActivity(intent)
             }
                 return myview

@@ -22,8 +22,6 @@ var controller:Controller?=null
     {
         var title=Qaddtitle.text.toString()
         var cont=Qaddcontent.text.toString()
-        Pickedlesson.Lesson_num=1
-        Pickedlesson.Course_code=1
      var questionnumber= controller!!.NewQuestionID(Pickedlesson.Course_code!!, Pickedlesson.Lesson_num!!)
         var success=controller!!.insertQuestion(Pickedlesson.Lesson_num!!,Pickedlesson.Course_code!!,Studentinfo.Studentemail!!, Date(),title,cont,questionnumber)
         if(success)

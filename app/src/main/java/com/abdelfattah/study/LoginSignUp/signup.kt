@@ -20,6 +20,8 @@ class signup : AppCompatActivity() {
         controller= Controller(this)
         setSupportActionBar(mytoolbarsignup as Toolbar)
         supportActionBar!!.title="SIGN UP"
+        Doctorinfo.email="Unknown"
+        Studentinfo.Studentemail="Unknown"
     }
 
     fun signupevent(view:View)

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddAnnouncement;
 import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddMaterials;
+import com.abdelfattah.study.LoginSignUp.Studentinfo;
 import com.abdelfattah.study.R;
 
 public class Materials extends Fragment {
@@ -29,12 +30,18 @@ public class Materials extends Fragment {
         if (getArguments() != null) {
 
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View myview= inflater.inflate(R.layout.fragment_materials, container, false);
+       if(Studentinfo.INSTANCE.getStudentemail()!="Unknown")
+       {
+           Button btn=myview.findViewById(R.id.AddMaterials);
+           btn.setVisibility(View.GONE);
+       }
         Button b = (Button)myview.findViewById(R.id.AddMaterials);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
