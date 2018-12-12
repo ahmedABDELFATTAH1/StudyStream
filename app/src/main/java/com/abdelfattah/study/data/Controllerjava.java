@@ -62,7 +62,7 @@ public class Controllerjava {
     //region inserting Lessons,Announcements,Materials
 
     //Inserting a new announcement
-    public void InsertAnnouncement(int course_code, int announcement_number, String title, String Content, Date date ,String doc_id)
+    public void InsertAnnouncement(int course_code, int announcement_number, String title, String Content, java.util.Date date , String doc_id)
     {
         ContentValues contentValues = new ContentValues();
 
@@ -80,7 +80,7 @@ public class Controllerjava {
 
     }
 
-    public void InsertMaterial(int course_code, int material_number, String title, String Content, Date date ,String doc_id)
+    public void InsertMaterial(int course_code, int material_number, String title, String Content, java.util.Date date , String doc_id)
     {
 
 

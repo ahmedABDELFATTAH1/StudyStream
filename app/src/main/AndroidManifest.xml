@@ -32,7 +32,12 @@
         <activity android:name=".Questions.QuestionStudent" />
         <activity android:name=".Questions.AddQuestion" />
         <activity android:name=".Answers.AddAnswer" />
-        <activity android:name=".data.courseMainMenu"></activity>
+        <activity
+            android:name=".CourseMainMenu.Fragments.MainCourseDoctor"
+            android:label="@string/title_activity_main_course_doctor" />
+        <activity android:name=".CourseMainMenu.Fragments.ADD.AddMaterials" />
+        <activity android:name=".CourseMainMenu.Fragments.ADD.AddLesson" />
+        <activity android:name=".CourseMainMenu.Fragments.ADD.AddAnnouncement" />
     </application>
 
 </manifest>

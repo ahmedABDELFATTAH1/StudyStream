@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import com.abdelfattah.study.CourseMainMenu.Fragments.MainCourseDoctor
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.MainActivity
@@ -108,12 +109,12 @@ fun ADDCOURSEEVENT(view: View)
             myview.ccode.text=currentcourse.Course_Code.toString()
 
             myview.setOnClickListener {
-               PickedCourse.Code=currentcourse.Course_Code
+                PickedCourse.Code=currentcourse.Course_Code
                 PickedCourse.password=currentcourse.password
                 PickedCourse.Description=currentcourse.Desc
                 PickedCourse.Doc_id=currentcourse.Doctor_ID
                 PickedCourse.Title=currentcourse.Title
-                var intent=Intent(applicationContext,QuestionsDoctor::class.java)
+                var intent=Intent(applicationContext,MainCourseDoctor::class.java)
                 startActivity(intent)
             }
             return myview

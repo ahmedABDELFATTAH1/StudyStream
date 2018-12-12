@@ -5,12 +5,8 @@ import android.content.Context
 import android.database.Cursor
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.Studentinfo
-import com.abdelfattah.study.Questions.QuestionObject
-import com.abdelfattah.study.data.*
 import com.abdelfattah.study.data.StudyStreamContract.*
 import java.util.*
-import com.abdelfattah.study.data.StudyStreamContract.Announcements
-
 
 
 class Controller {
@@ -190,5 +186,12 @@ class Controller {
         return maxID + 1
     }
 
+    fun SelectAllLessons(CourseCode: Int): Cursor {
+        //select * from Lesson where Course_Code = course_code
+        val query = "Select * from " + Lesson.Table_Name + " where " + Lesson.Column_Course_Code + " =? "
+        val Argument = arrayOf(Integer.toString(CourseCode))
+        return db!!.Select(query, Argument)
+
+    }
 
 }
