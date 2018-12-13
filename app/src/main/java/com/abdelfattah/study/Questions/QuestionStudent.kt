@@ -70,11 +70,10 @@ class QuestionStudent : AppCompatActivity() {
             var  contentt=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Questions.Column_Content))
             var  title=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Questions.Column_Title))
             Isnotempty=cursor.moveToNext()
-            var rating=controller!!.Rating(coursenumm.toString(),lessonnumm.toString(),questionnum.toString())
+            var rating=controller!!.QRating(coursenumm.toString(),lessonnumm.toString(),questionnum.toString())
             ListofQuestions!!.add(Questiondata(questionnum,lessonnumm,coursenumm,studentid,TheDate,contentt,title,rating))
         }
     }
-
     inner class QuestionsAdabterlist(): BaseAdapter()
     {
 

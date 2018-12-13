@@ -210,7 +210,7 @@ class Controller {
 
         return maxID + 1
     }
-    fun Rating(coursenum:String,Lessonnum:String,Questionnum:String):Int
+    fun QRating(coursenum:String,Lessonnum:String,Questionnum:String):Int
     {
         var query="Select Sum( "+USER_VOTE_QUESTION.Column_Rating+" ) from "+USER_VOTE_QUESTION.Table_Name+" where "+USER_VOTE_QUESTION.Column_Course_Code+" =? and "+USER_VOTE_QUESTION.Column_Lesson_Num+" =?  and "+USER_VOTE_QUESTION.Column_Question_Num+" =? "
         var argument= arrayOf(coursenum,Lessonnum,Questionnum)
@@ -219,6 +219,15 @@ class Controller {
         return cursor.getInt(0)
 
     }
+    fun ARating(coursenum:String,Lessonnum:String,Questionnum:String,Answernum:String):Int
+    {
+        var query="Select Sum( "+USER_VOTE_ANSWERS.Column_Rating+" ) from "+USER_VOTE_ANSWERS.Table_Name+" where "+USER_VOTE_ANSWERS.Column_Course_Code+" =? and "+USER_VOTE_ANSWERS.Column_Lesson_Num+" =?  and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? "
+        var argument= arrayOf(coursenum,Lessonnum,Questionnum,Answernum)
+        var cursor=  db!!.Select(query,argument)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
 
     fun SelectAllLessons(CourseCode: Int): Cursor {
         //select * from Lesson where Course_Code = course_code
@@ -266,6 +275,34 @@ class Controller {
         contentvalues.put(USER_VOTE_QUESTION.Column_USER_ID,useremail)
         contentvalues.put(USER_VOTE_QUESTION.Column_Rating,rating)
       return  db!!.insert(USER_VOTE_QUESTION.Table_Name,contentvalues)
+
+    }
+    fun Aisalreadyrate(coursenum:String,Lessonnum:String,Questionnum:String,useremai:String,answernumber:String):Boolean
+    {
+        var query="Select * from "+USER_VOTE_ANSWERS.Table_Name+" where "+USER_VOTE_ANSWERS.Column_Course_Code+" =? and "+USER_VOTE_ANSWERS.Column_Lesson_Num+" =? and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? and "+USER_VOTE_ANSWERS.Column_USER_ID+" =? and "+USER_VOTE_ANSWERS.Column_Answer_Num+" =? "
+        var Argument= arrayOf(coursenum,Lessonnum,Questionnum,useremai,answernumber)
+        var cursor =db!!.Select(query,Argument)
+        return cursor.count>0
+    }
+    fun Aupdaterate(coursenum:String,Lessonnum:String,Questionnum:String,useremail:String,rating:Int,answernumber:String):Boolean
+    {
+        var contentvalues=ContentValues()
+        contentvalues.put(USER_VOTE_QUESTION.Column_Rating,rating)
+        var whereclause=USER_VOTE_ANSWERS.Column_Course_Code+" =? and "+USER_VOTE_ANSWERS.Column_Lesson_Num+" =? and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? and "+USER_VOTE_ANSWERS.Column_USER_ID+" =? and "+USER_VOTE_ANSWERS.Column_Answer_Num+" =? "
+        var Argument= arrayOf(coursenum,Lessonnum,Questionnum,useremail,answernumber)
+        return db!!.update(USER_VOTE_ANSWERS.Table_Name,contentvalues,Argument,whereclause)
+
+    }
+    fun Ainsertnewrate(coursenum:Int,Lessonnum:Int,Questionnum:Int,useremail:String,rating:Int,Answernum:Int):Boolean
+    {
+        var contentvalues=ContentValues()
+        contentvalues.put(USER_VOTE_ANSWERS.Column_Course_Code,coursenum)
+        contentvalues.put(USER_VOTE_ANSWERS.Column_Lesson_Num,Lessonnum)
+        contentvalues.put(USER_VOTE_ANSWERS.Column_Question_Num,Questionnum)
+        contentvalues.put(USER_VOTE_ANSWERS.Column_USER_ID,useremail)
+        contentvalues.put(USER_VOTE_ANSWERS.Column_Rating,rating)
+        contentvalues.put(USER_VOTE_ANSWERS.Column_Answer_Num,Answernum)
+        return  db!!.insert(USER_VOTE_ANSWERS.Table_Name,contentvalues)
 
     }
 

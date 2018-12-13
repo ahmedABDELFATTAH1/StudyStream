@@ -47,6 +47,13 @@
             android:layout_weight="1"
             android:text="DVote" />
 
+        <Button
+            android:id="@+id/NORATING"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="NORATING" />
+
         <TextView
             android:id="@+id/RateText"
             android:layout_width="wrap_content"
