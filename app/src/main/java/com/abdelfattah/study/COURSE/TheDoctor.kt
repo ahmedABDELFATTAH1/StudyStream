@@ -14,7 +14,6 @@ import com.abdelfattah.study.CourseMainMenu.Fragments.MainCourseDoctor
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.MainActivity
-import com.abdelfattah.study.Questions.QuestionsDoctor
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
 import com.abdelfattah.study.data.StudyStreamContract

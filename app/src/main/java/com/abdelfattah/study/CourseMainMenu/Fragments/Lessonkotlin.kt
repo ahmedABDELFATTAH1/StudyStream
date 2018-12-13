@@ -18,7 +18,6 @@ import com.abdelfattah.study.LESSONS.Pickedlesson
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.Questions.QuestionObject
 import com.abdelfattah.study.Questions.QuestionStudent
-import com.abdelfattah.study.Questions.QuestionsDoctor
 
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller

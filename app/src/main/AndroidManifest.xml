@@ -28,7 +28,6 @@
         <activity android:name=".COURSE.JoinCourse" />
         <activity android:name=".COURSE.AddCourse" />
         <activity android:name=".COURSE.AddBio" />
-        <activity android:name=".Questions.QuestionsDoctor" />
         <activity android:name=".Questions.QuestionStudent" />
         <activity android:name=".Questions.AddQuestion" />
         <activity android:name=".Answers.AddAnswer" />

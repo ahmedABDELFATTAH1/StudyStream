@@ -3,7 +3,9 @@ package com.abdelfattah.study.data
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.media.Rating
 import com.abdelfattah.study.Answers.AnswerObject
+import com.abdelfattah.study.Answers.AnswerObject.coursenum
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.data.StudyStreamContract.*
@@ -208,6 +210,15 @@ class Controller {
 
         return maxID + 1
     }
+    fun Rating(coursenum:String,Lessonnum:String,Questionnum:String):Int
+    {
+        var query="Select Sum( "+USER_VOTE_QUESTION.Column_Rating+" ) from "+USER_VOTE_QUESTION.Table_Name+" where "+USER_VOTE_QUESTION.Column_Course_Code+" =? and "+USER_VOTE_QUESTION.Column_Lesson_Num+" =?  and "+USER_VOTE_QUESTION.Column_Question_Num+" =? "
+        var argument= arrayOf(coursenum,Lessonnum,Questionnum)
+      var cursor=  db!!.Select(query,argument)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+
+    }
 
     fun SelectAllLessons(CourseCode: Int): Cursor {
         //select * from Lesson where Course_Code = course_code
@@ -230,5 +241,33 @@ class Controller {
         contentvalues.put(Answers.Column_Date,datee.toString())
         return db!!.insert(Answers.Table_Name,contentvalues)
     }
+    fun Qisalreadyrate(coursenum:String,Lessonnum:String,Questionnum:String,useremai:String):Boolean
+    {
+        var query="Select * from "+USER_VOTE_QUESTION.Table_Name+" where "+USER_VOTE_QUESTION.Column_Course_Code+" =? and "+USER_VOTE_QUESTION.Column_Lesson_Num+" =? and "+USER_VOTE_QUESTION.Column_Question_Num+" =? and "+USER_VOTE_QUESTION.Column_USER_ID+" =? "
+        var Argument= arrayOf(coursenum,Lessonnum,Questionnum,useremai)
+      var cursor =db!!.Select(query,Argument)
+        return cursor.count>0
+    }
+    fun Qupdaterate(coursenum:String,Lessonnum:String,Questionnum:String,useremail:String,rating:Int):Boolean
+    {
+        var contentvalues=ContentValues()
+        contentvalues.put(USER_VOTE_QUESTION.Column_Rating,rating)
+        var whereclause=USER_VOTE_QUESTION.Column_Course_Code+" =? and "+USER_VOTE_QUESTION.Column_Lesson_Num+" =? and "+USER_VOTE_QUESTION.Column_Question_Num+" =? and "+USER_VOTE_QUESTION.Column_USER_ID+" =?"
+        var Argument= arrayOf(coursenum,Lessonnum,Questionnum,useremail)
+        return db!!.update(USER_VOTE_QUESTION.Table_Name,contentvalues,Argument,whereclause)
+
+    }
+    fun Qinsertnewrate(coursenum:Int,Lessonnum:Int,Questionnum:Int,useremail:String,rating:Int):Boolean
+    {
+        var contentvalues=ContentValues()
+        contentvalues.put(USER_VOTE_QUESTION.Column_Course_Code,coursenum)
+        contentvalues.put(USER_VOTE_QUESTION.Column_Lesson_Num,Lessonnum)
+        contentvalues.put(USER_VOTE_QUESTION.Column_Question_Num,Questionnum)
+        contentvalues.put(USER_VOTE_QUESTION.Column_USER_ID,useremail)
+        contentvalues.put(USER_VOTE_QUESTION.Column_Rating,rating)
+      return  db!!.insert(USER_VOTE_QUESTION.Table_Name,contentvalues)
+
+    }
+
 
 }
