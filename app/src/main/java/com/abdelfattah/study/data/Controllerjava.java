@@ -24,7 +24,7 @@ public class Controllerjava {
 
 
     }
-
+    // region selecting all Announcements,materials,lessons from a particular course
     public Cursor SelectAllAnnouncements(int CourseCode)
     {
         //select * from Announcements where Course_Code = course_code Order by date desc
@@ -111,7 +111,7 @@ public class Controllerjava {
 
     //endregion
 
-    //region checking titles
+    //region checking Announcements,Materials,Lessons titles
     //checking if there is an announcement with the same name as title
     public boolean CheckAnnouncement(String title , int CourseCode)
     {
@@ -199,6 +199,94 @@ public class Controllerjava {
         mCount.close();
         return maxID + 1;
     }
+
+    //endregion
+
+    //region Student_Lesson Operations
+
+    //Checking if Student voted for the lesson or not
+    //returns true if student has voted and false if student didnt vote
+    public boolean CheckStudentVote(int courseCode , int lessonNum,String studentId)
+    {
+        //select count(*)
+        // from LESSON_STUD
+        // where Course_Code = courseCode AND Lesson_Num = lessonNum AND Stud_id = studentId
+        String query = "Select Count(*) From " + LESSON_STUD.Table_Name
+                + " Where " + LESSON_STUD.Column_Course_Code + " = " + courseCode
+                +  " AND " + LESSON_STUD.Column_Lesson_Num + " = " + lessonNum
+                + " AND " + LESSON_STUD.Column_Stud_ID  + " = '" + studentId + "'" ;
+        Cursor cursor = db.Select(query,null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of students who voted with Id = studentId
+        if (count>=1)
+            return  true;
+        else return false;
+
+
+    }
+    // INSERTING a student vote
+    public void InsertVote (int courseCode , int lessonNum,String studentId , int vote)
+    {
+        ContentValues contentValues = new ContentValues();
+
+        //mapping values to corresponding columns
+        contentValues.put(LESSON_STUD.Column_Course_Code,courseCode);
+        contentValues.put(LESSON_STUD.Column_Lesson_Num,lessonNum);
+        contentValues.put(LESSON_STUD.Column_Stud_ID,studentId);
+        contentValues.put(LESSON_STUD.Column_Status,vote);
+
+        db.insert(LESSON_STUD.Table_Name,contentValues);
+    }
+
+    //selecting all yes votes from a particular lesson
+    public Cursor SelectAllVotes(int courseCode , int lessonNum)
+    {
+        //Select * From LESSON_STUD
+        // where Course_Code = courseCode AND Lesson_Num = lessonNum AND Status = 1
+        String query = "Select * from " + LESSON_STUD.Table_Name + " Where "
+                + LESSON_STUD.Column_Course_Code + " = " + courseCode
+                +  " AND " + LESSON_STUD.Column_Lesson_Num + " = " + lessonNum
+                +   "AND " + LESSON_STUD.Column_Status + " = 1";
+        Cursor cursor = db.Select(query , null);
+        return cursor;
+    }
+    //this fn returns the num of students who voted yes
+    public int PositiveFeedBackNum(int courseCode , int lessonNum)
+    {
+        //select count(*)
+        // from LESSON_STUD
+        // where Course_Code = courseCode AND Lesson_Num = lessonNum AND Status = 1
+        String query = "Select Count(*) From " + LESSON_STUD.Table_Name
+                + " Where " + LESSON_STUD.Column_Course_Code + " = " + courseCode
+                +  " AND " + LESSON_STUD.Column_Lesson_Num + " = " + lessonNum
+                + " AND " + LESSON_STUD.Column_Status  + " = 1";
+        Cursor cursor = db.Select(query,null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of students who voted yes
+        return  count;
+
+
+    }
+    //this fn returns the num of students who voted no
+    public int NegativeFeedBackNum(int courseCode , int lessonNum)
+    {
+        //select count(*)
+        // from LESSON_STUD
+        // where Course_Code = courseCode AND Lesson_Num = lessonNum AND Status = 0
+        String query = "Select Count(*) From " + LESSON_STUD.Table_Name
+                + " Where " + LESSON_STUD.Column_Course_Code + " = " + courseCode
+                +  " AND " + LESSON_STUD.Column_Lesson_Num + " = " + lessonNum
+                + " AND " + LESSON_STUD.Column_Status  + " = 0";
+        Cursor cursor = db.Select(query,null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of students who voted with no
+        return  count;
+
+
+    }
+
+
+
 
     //endregion
 

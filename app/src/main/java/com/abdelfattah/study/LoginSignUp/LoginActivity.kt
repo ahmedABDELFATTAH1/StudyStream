@@ -46,6 +46,8 @@ class LoginActivity : AppCompatActivity() {
                Doctorinfo.password=UserCursor.getString(1)
                Doctorinfo.Fname=UserCursor.getString(2)
                Doctorinfo.Secondname=UserCursor.getString(3)
+               PickedUser.Doctor = true;
+               PickedUser.ID = Doctorinfo.email;
                 Toast.makeText(this, "A7la Mesa 3la El so7ab", Toast.LENGTH_LONG).show()
                 var intent = Intent(this, TheDoctor::class.java)
                 startActivity(intent)
@@ -56,6 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 Studentinfo.password=UserCursor.getString(1)
                 Studentinfo.StudentFname=UserCursor.getString(2)
                 Studentinfo.Secondname=UserCursor.getString(3)
+                PickedUser.Doctor = false;
+                PickedUser.ID = Studentinfo.Studentemail;
                 var intent = Intent(this, TheStudent::class.java)
                startActivity(intent)
           }

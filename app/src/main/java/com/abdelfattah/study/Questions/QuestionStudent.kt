@@ -8,13 +8,19 @@ import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.abdelfattah.study.Answers.Answers
+import com.abdelfattah.study.COURSE.PickedCourse
+import com.abdelfattah.study.LESSONS.PickedLesson2
 import com.abdelfattah.study.LESSONS.Pickedlesson
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
+import com.abdelfattah.study.LoginSignUp.PickedUser
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
+import com.abdelfattah.study.data.Controllerjava
 import com.abdelfattah.study.data.StudyStreamContract
 import kotlinx.android.synthetic.main.activity_add_lesson.view.*
 import kotlinx.android.synthetic.main.activity_question_student.*
@@ -24,6 +30,7 @@ import kotlinx.android.synthetic.main.questiondoctorticket.view.*
 class QuestionStudent : AppCompatActivity() {
     var ListofQuestions:ArrayList<Questiondata>?=null
     var controller: Controller?=null
+    var controller2: Controllerjava?=null
     var rating:Int?=0
     var useremail:String?=null
     var adapter:QuestionsAdabterlist?=null
@@ -31,6 +38,7 @@ class QuestionStudent : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_student)
         controller= Controller(this)
+        controller2= Controllerjava(this)
         ListofQuestions= ArrayList()
         getQuestions()
         adapter=QuestionsAdabterlist()
@@ -46,12 +54,28 @@ class QuestionStudent : AppCompatActivity() {
             useremail=Studentinfo.Studentemail
             rating=1
         }
+
+        if(PickedUser.Doctor == true)
+        {
+            val l = findViewById<View>(R.id.Student_Feedback_view) as LinearLayout
+            l.visibility = View.GONE
+            SetDocFeedBacks()
+
+        }
+        else
+        {
+            val l = findViewById<View>(R.id.Doctor_Feedback_view) as LinearLayout
+            l.visibility = View.GONE
+            CheckStudentFeedBack()
+
+        }
     }
 
     fun AddQuestionEvent(view: View)
     {
         var intent= Intent(this,AddQuestion::class.java)
         startActivity(intent)
+
     }
 
 
@@ -73,6 +97,38 @@ class QuestionStudent : AppCompatActivity() {
             var rating=controller!!.QRating(coursenumm.toString(),lessonnumm.toString(),questionnum.toString())
             ListofQuestions!!.add(Questiondata(questionnum,lessonnumm,coursenumm,studentid,TheDate,contentt,title,rating))
         }
+    }
+    fun YesClicked(view: View) {
+        val l = findViewById<View>(R.id.Student_Feedback_view) as LinearLayout
+        l.visibility = View.GONE
+        controller2!!.InsertVote(PickedCourse.Code, PickedLesson2.LessonNumber, PickedUser.ID, 1)
+    }
+
+    fun NoClicked(view: View) {
+        val l = findViewById<View>(R.id.Student_Feedback_view) as LinearLayout
+        l.visibility = View.GONE
+        controller2!!.InsertVote(PickedCourse.Code, PickedLesson2.LessonNumber, PickedUser.ID, 0)
+    }
+    private fun SetDocFeedBacks() {
+        //getting the number of positive and negative feed backs
+        val PosFeedBacks = controller2!!.PositiveFeedBackNum(PickedCourse.Code, PickedLesson2.LessonNumber)
+        val NegFeedBacks = controller2!!.NegativeFeedBackNum(PickedCourse.Code, PickedLesson2.LessonNumber)
+        //getting the text view where i will show the number
+        val PV = findViewById<View>(R.id.positiveFeedBackNum) as TextView
+        val NV = findViewById<View>(R.id.negativeFeedBackNum) as TextView
+        //setting the number of feedbacks
+        PV.setText(PosFeedBacks.toString())
+        NV.setText(NegFeedBacks.toString())
+
+    }
+    fun CheckStudentFeedBack() {
+        //check if student voted or not  if he voted i should make the student feed back disappear as he already voted
+        val voted = controller2!!.CheckStudentVote(PickedCourse.Code, PickedLesson2.LessonNumber, PickedUser.ID)
+        if (voted) {
+            val l = findViewById<View>(R.id.Student_Feedback_view) as LinearLayout
+            l.visibility = View.GONE
+        }
+
     }
     inner class QuestionsAdabterlist(): BaseAdapter()
     {

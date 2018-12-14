@@ -9,22 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
 import com.abdelfattah.study.COURSE.PickedCourse
-import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddAnnouncement
-import com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddLesson
+import com.abdelfattah.study.LESSONS.AddLesson
 import com.abdelfattah.study.LESSONS.Lessonsdata
+import com.abdelfattah.study.LESSONS.PickedLesson2
 import com.abdelfattah.study.LESSONS.Pickedlesson
+import com.abdelfattah.study.LoginSignUp.PickedUser
 import com.abdelfattah.study.LoginSignUp.Studentinfo
-import com.abdelfattah.study.Questions.QuestionObject
 import com.abdelfattah.study.Questions.QuestionStudent
 
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
-import com.abdelfattah.study.data.StudyStreamContract
 import com.abdelfattah.study.data.StudyStreamContract.*
-import kotlinx.android.synthetic.main.dcourseticket.view.*
-import kotlinx.android.synthetic.main.fragment_lessons.*
 import kotlinx.android.synthetic.main.fragment_lessons.view.*
 import kotlinx.android.synthetic.main.lessonticket.view.*
 
@@ -54,7 +50,7 @@ class Lessonkotlin : Fragment() {
         myview.LessontList.adapter=adapter
         adapter.notifyDataSetChanged()
         myview.AddLesson.setOnClickListener {
-            val intent = Intent(context,com.abdelfattah.study.CourseMainMenu.Fragments.ADD.AddLesson::class.java)
+            val intent = Intent(context, AddLesson::class.java)
             startActivity(intent)
         }
         return myview
@@ -118,8 +114,12 @@ class Lessonkotlin : Fragment() {
                Pickedlesson.Course_code=currentlesson.Course_code
                 Pickedlesson.Lesson_num=currentlesson.Lesson_num
                 Pickedlesson.Title=currentlesson.Title
+
+                PickedLesson2.LessonNumber=currentlesson.Lesson_num
+
+
                 var intent=Intent(context,QuestionStudent::class.java)
-                startActivity(intent)
+               startActivity(intent)
             }
             return myview
         }

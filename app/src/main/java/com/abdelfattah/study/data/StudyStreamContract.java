@@ -101,11 +101,12 @@ public final class StudyStreamContract {
         public static final String Column_Stud_ID = "Stud_ID";
     }
 
-        public static class LESSON_STUD implements BaseColumns {
+    public static class LESSON_STUD implements BaseColumns {
         public static final String Table_Name = "LESSON_STUD";
         public static final String Column_Course_Code = "Course_Code";
         public static final String Column_Stud_ID = "Stud_ID";
         public static final String Column_Lesson_Num = "Lesson_Num";
+        public static final String Column_Status = "Status";
     }
     public static class USER_VOTE_QUESTION implements BaseColumns {
         public static final String Table_Name = "USER_VOTE_QUESTION";

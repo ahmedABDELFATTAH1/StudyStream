@@ -138,7 +138,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "( " + LESSON_STUD.Column_Course_Code + " INTEGER NOT NULL, "
                 + LESSON_STUD.Column_Lesson_Num + " INTEGER NOT NULL, "
                 + LESSON_STUD.Column_Stud_ID + " TEXT NOT NULL ,"
-                + "PRIMARY KEY (" + LESSON_STUD.Column_Course_Code + "," + LESSON_STUD.Column_Stud_ID+ ")"
+                + LESSON_STUD.Column_Status + " INTEGER NOT NULL ,"
+                + "PRIMARY KEY (" + LESSON_STUD.Column_Course_Code +"," + LESSON_STUD.Column_Lesson_Num+ "," + LESSON_STUD.Column_Stud_ID+ ")"
                 + ",FOREIGN KEY (" + LESSON_STUD.Column_Course_Code + "," + LESSON_STUD.Column_Lesson_Num +") REFERENCES "
                 + Lesson.Table_Name + "(" + Lesson.Column_Course_Code + "," + Lesson.Column_Lesson_Num + ")"
                 + ", FOREIGN KEY (" + LESSON_STUD.Column_Stud_ID +") REFERENCES " + Student.Table_Name

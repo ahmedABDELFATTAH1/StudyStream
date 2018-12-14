@@ -1,4 +1,4 @@
-package com.abdelfattah.study.CourseMainMenu.Fragments.ADD;
+package com.abdelfattah.study.LESSONS;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
