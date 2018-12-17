@@ -78,6 +78,12 @@ class QuestionStudent : AppCompatActivity() {
 
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getQuestions()
+        adapter!!.notifyDataSetChanged()
+    }
+
 
     fun getQuestions()
     {

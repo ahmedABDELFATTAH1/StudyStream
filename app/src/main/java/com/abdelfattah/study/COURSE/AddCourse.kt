@@ -39,7 +39,6 @@ class AddCourse : AppCompatActivity() {
                 var success=controller!!.InsertNewCourse(Course.Table_Name,content)
                 if(success)
                 {
-                    Toast.makeText(this,"Data inserted successufaly",Toast.LENGTH_SHORT).show()
                     finish()
 
                 }

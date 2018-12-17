@@ -39,6 +39,7 @@ public class AddMaterials extends AppCompatActivity {
         }
         int MaterialNum = controller.NewMaterialID(PickedCourse.Code);
         controller.InsertMaterial(PickedCourse.Code,MaterialNum,title,content,new java.util.Date(),PickedCourse.Doc_id);
+        finish();
 
     }
 

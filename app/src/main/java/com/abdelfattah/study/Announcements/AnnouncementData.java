@@ -1,6 +1,5 @@
 package com.abdelfattah.study.Announcements;
 
-
 public class AnnouncementData {
     private String mTitle;
     private int mCourseCode;

@@ -77,8 +77,16 @@ public class Announcement extends Fragment {
         return  myview;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        GetAllAnnouncements();
+        adapter.notifyDataSetChanged();
+    }
+
     public void GetAllAnnouncements()
     {
+        Announcementslist.clear();
         // Cursor cursor =controller!!.SelectAllLessons(PickedCourse.Code)
         Cursor cursor = controller.SelectAllAnnouncements(PickedCourse.Code);
         cursor.moveToFirst();

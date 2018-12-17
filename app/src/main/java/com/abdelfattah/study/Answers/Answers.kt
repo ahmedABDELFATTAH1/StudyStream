@@ -27,15 +27,16 @@ var controller:Controller?=null
 var listOfAnswers:ArrayList<Answerdata>?=null
     var rating:Int?=0
     var useremail:String?=null
+    var adapter:AnswerAdabterlist?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answers)
         listOfAnswers= ArrayList()
         controller= Controller(this)
         getAnswers()
-        var adapter= AnswerAdabterlist()
+        adapter= AnswerAdabterlist()
         AnswersList.adapter=adapter
-        adapter.notifyDataSetChanged()
+        adapter!!.notifyDataSetChanged()
         if(Doctorinfo.email!="Unknown")
         {
             useremail= Doctorinfo.email
@@ -47,6 +48,14 @@ var listOfAnswers:ArrayList<Answerdata>?=null
         }
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getAnswers()
+        adapter!!.notifyDataSetChanged()
+
+
+    }
+
     fun AddAnswerEvent(view:View)
     {
         var intent=Intent(this,com.abdelfattah.study.Answers.AddAnswer::class.java)
@@ -55,6 +64,7 @@ var listOfAnswers:ArrayList<Answerdata>?=null
     }
     fun getAnswers()
     {
+        listOfAnswers!!.clear()
         var cursor=controller!!.getAnswer(QuestionObject.coursenume!!, QuestionObject.lessonnume!!,QuestionObject.questionnum)
         var Isnotempty:Boolean=cursor.moveToFirst()
         while (Isnotempty)
@@ -94,8 +104,10 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                   var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,rating!!,currentAnswer.Answernum.toString())
                   if(success)
                   {
-                      myview.downvotebtn.setTextColor(Color.BLUE)
-                      myview.Upvotebtn.setTextColor(Color.BLACK)
+                    var rat=  myview.RateText.text.toString().toInt()
+                     rat+=rating!!*2
+                      myview.RateText.text=rat.toString()
+                      notifyDataSetChanged()
 
                   }
 
@@ -105,8 +117,11 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                   var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,rating!!,currentAnswer.Answernum)
                   if(success)
                   {
-                      myview.downvotebtn.setTextColor(Color.BLUE)
-                      myview.Upvotebtn.setTextColor(Color.BLACK)
+                      var rat=  myview.RateText.text.toString().toInt()
+                      rat+=rating!!*2
+                      myview.RateText.text=rat.toString()
+                      notifyDataSetChanged()
+
                   }
 
               }
@@ -121,8 +136,6 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,0!!,currentAnswer.Answernum.toString())
                     if(success)
                     {
-                        myview.downvotebtn.setTextColor(Color.BLUE)
-                        myview.Upvotebtn.setTextColor(Color.BLACK)
 
                     }
 
@@ -132,8 +145,7 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,0!!,currentAnswer.Answernum)
                     if(success)
                     {
-                        myview.downvotebtn.setTextColor(Color.BLUE)
-                        myview.upvotebtn.setTextColor(Color.BLACK)
+
                     }
 
                 }
@@ -147,8 +159,10 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,-rating!!,currentAnswer.Answernum.toString())
                     if(success)
                     {
-                        myview.downvotebtn.setTextColor(Color.BLUE)
-                        myview.Upvotebtn.setTextColor(Color.BLACK)
+                        var rat=  myview.RateText.text.toString().toInt()
+                        rat-=rating!!*2
+                        myview.RateText.text=rat.toString()
+                        notifyDataSetChanged()
 
                     }
 
@@ -158,8 +172,10 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,-rating!!,currentAnswer.Answernum)
                     if(success)
                     {
-                        myview.downvotebtn.setTextColor(Color.BLUE)
-                        myview.upvotebtn.setTextColor(Color.BLACK)
+                        var rat=  myview.RateText.text.toString().toInt()
+                        rat-=rating!!*2
+                        myview.RateText.text=rat.toString()
+                        notifyDataSetChanged()
                     }
 
                 }

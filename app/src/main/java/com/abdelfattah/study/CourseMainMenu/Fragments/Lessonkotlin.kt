@@ -27,9 +27,9 @@ import kotlinx.android.synthetic.main.lessonticket.view.*
 
 class Lessonkotlin : Fragment() {
     var controller:Controller?=null
-
     private var listener: OnFragmentInteractionListener? = null
     var ListofLessons:ArrayList<Lessonsdata>?=null
+    var adapter:LessonAdabterlist?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +46,9 @@ class Lessonkotlin : Fragment() {
         if (Studentinfo.Studentemail !== "Unknown") {
             myview.AddLesson.visibility = View.GONE
         }
-        var adapter=LessonAdabterlist()
+        adapter=LessonAdabterlist()
         myview.LessontList.adapter=adapter
-        adapter.notifyDataSetChanged()
+        adapter!!.notifyDataSetChanged()
         myview.AddLesson.setOnClickListener {
             val intent = Intent(context, AddLesson::class.java)
             startActivity(intent)
@@ -56,8 +56,14 @@ class Lessonkotlin : Fragment() {
         return myview
     }
 
+    override fun onStart() {
+        super.onStart()
+        GetAllLessons()
+        adapter!!.notifyDataSetChanged()
+    }
     fun GetAllLessons()
     {
+        ListofLessons!!.clear()
         var cursor =controller!!.SelectAllLessons(PickedCourse.Code)
         var Isnotempty:Boolean=cursor.moveToFirst()
         //   Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
@@ -72,6 +78,7 @@ class Lessonkotlin : Fragment() {
 
 
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.scourseticket.view.*
 class TheStudent : AppCompatActivity() {
     var ListOfCourses:ArrayList<CourseStudent>?=null
     var controller: Controller?=null
+    var adapter:CourseAdabterlist?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_the_student)
@@ -32,9 +33,9 @@ class TheStudent : AppCompatActivity() {
         setSupportActionBar(mytoolbarstudent as Toolbar)
         supportActionBar!!.title="Welcome Student "+ Studentinfo.StudentFname
         getCourse()
-        var lsitadpter=CourseAdabterlist()
-        SCourseList.adapter=lsitadpter
-        lsitadpter.notifyDataSetChanged()
+        adapter=CourseAdabterlist()
+        SCourseList.adapter= adapter
+        adapter!!.notifyDataSetChanged()
     }
     fun JoinEvent(view: View)
     {
@@ -44,6 +45,7 @@ class TheStudent : AppCompatActivity() {
     }
     fun getCourse()
     {
+        ListOfCourses!!.clear()
         var cursor=controller!!.JoindedCourses(Studentinfo.Studentemail!!)
         var Isnotempty:Boolean=cursor.moveToFirst()
       //  Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
@@ -58,6 +60,13 @@ class TheStudent : AppCompatActivity() {
             ListOfCourses!!.add(CourseStudent(Courscode,Coursetitle,CourseDesc,DoctorID,Coursepass))
             Isnotempty=cursor.moveToNext()
         }
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getCourse()
+        adapter!!.notifyDataSetChanged()
 
     }
 

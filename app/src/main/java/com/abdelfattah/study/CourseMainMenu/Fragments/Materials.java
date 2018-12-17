@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.abdelfattah.study.Announcements.AnnouncementData;
 import com.abdelfattah.study.COURSE.PickedCourse;
 import com.abdelfattah.study.LoginSignUp.PickedUser;
 import com.abdelfattah.study.Materials.AddMaterials;
@@ -47,6 +46,13 @@ public class Materials extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        GetAllMaterials();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View myview= inflater.inflate(R.layout.fragment_materials, container, false);
@@ -69,6 +75,7 @@ public class Materials extends Fragment {
 
     public void GetAllMaterials()
     {
+        MaterialList.clear();
         // Cursor cursor =controller!!.SelectAllLessons(PickedCourse.Code)
         Cursor cursor = controller.SelectAllMaterials(PickedCourse.Code);
         cursor.moveToFirst();

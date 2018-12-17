@@ -24,6 +24,7 @@ class TheDoctor : AppCompatActivity() {
 
     var ListOfMadeCourses:ArrayList<CourseStudent>?=null
     var controller: Controller?=null
+    var adapter:CourseAdabterlist?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_the_start)
@@ -31,11 +32,11 @@ class TheDoctor : AppCompatActivity() {
         ListOfMadeCourses=ArrayList()
         controller= Controller(this)
         GetMadeCourses()
-       // GetBio()
         supportActionBar!!.title="Welcome Doctor "+ Doctorinfo.Fname
-        var adapter=CourseAdabterlist()
+        adapter=CourseAdabterlist()
         DCourseList.adapter=adapter
-        adapter.notifyDataSetChanged()
+        adapter!!.notifyDataSetChanged()
+        GetBio()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
          super.onCreateOptionsMenu(menu)
@@ -64,6 +65,7 @@ class TheDoctor : AppCompatActivity() {
 
 fun GetMadeCourses()
 {
+    ListOfMadeCourses!!.clear()
     var cursor=controller!!.MadeCourses(Doctorinfo.email!!)
     var Isnotempty:Boolean=cursor.moveToFirst()
    //   Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
@@ -96,6 +98,13 @@ fun ADDCOURSEEVENT(view: View)
 
 
 }
+
+    override fun onRestart() {
+        super.onRestart()
+        GetMadeCourses()
+        adapter!!.notifyDataSetChanged()
+
+    }
     inner class CourseAdabterlist(): BaseAdapter()
     {
 

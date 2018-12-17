@@ -44,6 +44,7 @@ public class AddAnnouncement extends AppCompatActivity {
 
         int AnnouncementNum = controller.NewAnnouncementID(PickedCourse.Code);
         controller.InsertAnnouncement(PickedCourse.Code,AnnouncementNum,title,content,new java.util.Date(),PickedCourse.Doc_id);
+        finish();
     }
 
 

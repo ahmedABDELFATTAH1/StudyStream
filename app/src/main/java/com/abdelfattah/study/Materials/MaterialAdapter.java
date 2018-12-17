@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.abdelfattah.study.Announcements.AnnouncementData;
 import com.abdelfattah.study.R;
 
 import java.util.ArrayList;
