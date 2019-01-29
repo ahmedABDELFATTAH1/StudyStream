@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_add_lesson.view.*
 import kotlinx.android.synthetic.main.activity_question_student.*
 import kotlinx.android.synthetic.main.activity_the_start.*
 import kotlinx.android.synthetic.main.questiondoctorticket.view.*
+import java.util.Collections.swap
 
 class QuestionStudent : AppCompatActivity() {
     var ListofQuestions:ArrayList<Questiondata>?=null
@@ -71,6 +72,61 @@ class QuestionStudent : AppCompatActivity() {
         }
     }
 
+    fun sortlist()
+    {
+        var max=0
+        for (i in 0..ListofQuestions!!.count()-1)
+        {
+            for(j in i+1..ListofQuestions!!.count()-1)
+            {
+                if (ListofQuestions!![j].Rating>ListofQuestions!![max].Rating)
+                {
+                    max =j
+                }
+
+            }
+            swap(i,max)
+            max =i+1
+        }
+
+
+
+
+    }
+    fun swap(j:Int,max:Int)
+    {
+        var maxtitle=ListofQuestions!![max].title
+        var maxcon=ListofQuestions!![max].content
+        var maxuser=ListofQuestions!![max].studentid
+        var maxdate=ListofQuestions!![max].TheDate
+        var maxrate=ListofQuestions!![max].Rating
+        var maxln=ListofQuestions!![max].lessonnum
+        var maxcn=ListofQuestions!![max].coursenum
+        var qn=ListofQuestions!![max].questionnum
+
+        ///////////////////////////////////////////////
+        ListofQuestions!![max].title=ListofQuestions!![j].title
+        ListofQuestions!![max].content=ListofQuestions!![j].content
+        ListofQuestions!![max].studentid=ListofQuestions!![j].studentid
+        ListofQuestions!![max].TheDate=ListofQuestions!![j].TheDate
+        ListofQuestions!![max].lessonnum=ListofQuestions!![j].lessonnum
+        ListofQuestions!![max].coursenum=ListofQuestions!![j].coursenum
+        ListofQuestions!![max].questionnum=ListofQuestions!![j].questionnum
+        ListofQuestions!![max].Rating=ListofQuestions!![j].Rating
+        //////////////////
+        ListofQuestions!![j].title=maxtitle
+        ListofQuestions!![j].content=maxcon
+        ListofQuestions!![j].studentid=maxuser
+        ListofQuestions!![j].TheDate=maxdate
+        ListofQuestions!![j].Rating=maxrate
+        ListofQuestions!![j].lessonnum=maxln
+        ListofQuestions!![j].coursenum=maxcn
+        ListofQuestions!![j].questionnum=qn
+
+
+    }
+
+
     fun AddQuestionEvent(view: View)
     {
         var intent= Intent(this,AddQuestion::class.java)
@@ -103,6 +159,7 @@ class QuestionStudent : AppCompatActivity() {
             var rating=controller!!.QRating(coursenumm.toString(),lessonnumm.toString(),questionnum.toString())
             ListofQuestions!!.add(Questiondata(questionnum,lessonnumm,coursenumm,studentid,TheDate,contentt,title,rating))
         }
+        sortlist()
     }
     fun YesClicked(view: View) {
         val l = findViewById<View>(R.id.Student_Feedback_view) as LinearLayout
@@ -157,6 +214,27 @@ class QuestionStudent : AppCompatActivity() {
                 var intent=Intent(baseContext, Answers::class.java)
                 startActivity(intent)
             }
+            if(currentquestion.Rating>0)
+            {
+                myview.rateText.setTextColor(Color.BLUE)
+            }
+            if(currentquestion.Rating<0)
+            {
+                myview.rateText.setTextColor(Color.RED)
+
+            }
+            var thereQ=controller!!.getQuestionbystudent(currentquestion.lessonnum,currentquestion.coursenum,useremail!!,currentquestion.questionnum)
+            if(Doctorinfo.email=="Unknown"&&!thereQ)
+            {
+                myview.deletequestionbtn.visibility=View.GONE
+            }
+            myview.deletequestionbtn.setOnClickListener {
+
+                controller!!.DelteQuestion(currentquestion.coursenum,currentquestion.lessonnum,currentquestion.questionnum)
+            //    controller!!.DelteASAnswers(currentquestion.coursenum,currentquestion.lessonnum,currentquestion.questionnum)
+                getQuestions()
+                notifyDataSetChanged()
+            }
             myview.downvotebtn2.setOnClickListener {
                 if(controller!!.Qisalreadyrate(currentquestion.coursenum.toString(),currentquestion.lessonnum.toString(),currentquestion.questionnum.toString(),useremail.toString()))
                 {
@@ -164,8 +242,9 @@ class QuestionStudent : AppCompatActivity() {
                var success=  controller!!.Qupdaterate(currentquestion.coursenum.toString(),currentquestion.lessonnum.toString(),currentquestion.questionnum.toString(),useremail!!,-rating!!)
                     if(success)
                     {
-                        myview.downvotebtn2.setTextColor(Color.BLUE)
-                        myview.upvotebtn.setTextColor(Color.BLACK)
+                        getQuestions()
+                        notifyDataSetChanged()
+
 
                     }
 
@@ -175,8 +254,9 @@ class QuestionStudent : AppCompatActivity() {
                    var success= controller!!.Qinsertnewrate(currentquestion.coursenum,currentquestion.lessonnum,currentquestion.questionnum,useremail!!,-rating!!)
                     if(success)
                     {
-                        myview.downvotebtn2.setTextColor(Color.BLUE)
-                        myview.upvotebtn.setTextColor(Color.BLACK)
+                        getQuestions()
+                        notifyDataSetChanged()
+
                     }
 
                 }
@@ -191,9 +271,8 @@ class QuestionStudent : AppCompatActivity() {
                     var success=  controller!!.Qupdaterate(currentquestion.coursenum.toString(),currentquestion.lessonnum.toString(),currentquestion.questionnum.toString(),useremail!!,rating!!)
                     if(success)
                     {
-                        myview.upvotebtn.setTextColor(Color.RED)
-                        myview.downvotebtn2.setTextColor(Color.BLACK)
-
+                        getQuestions()
+                        notifyDataSetChanged()
                     }
 
                 }
@@ -202,8 +281,9 @@ class QuestionStudent : AppCompatActivity() {
                     var success= controller!!.Qinsertnewrate(currentquestion.coursenum,currentquestion.lessonnum,currentquestion.questionnum,useremail!!,rating!!)
                     if(success)
                     {
-                        myview.upvotebtn.setTextColor(Color.RED)
-                        myview.downvotebtn2.setTextColor(Color.BLACK)
+                        getQuestions()
+                        notifyDataSetChanged()
+
                     }
 
                 }
@@ -217,9 +297,9 @@ class QuestionStudent : AppCompatActivity() {
                     var success=  controller!!.Qupdaterate(currentquestion.coursenum.toString(),currentquestion.lessonnum.toString(),currentquestion.questionnum.toString(),useremail!!,0!!)
                     if(success)
                     {
+                        getQuestions()
                         notifyDataSetChanged()
-                        myview.upvotebtn.setTextColor(Color.BLACK)
-                        myview.downvotebtn2.setTextColor(Color.BLACK)
+
 
                     }
 
@@ -229,8 +309,8 @@ class QuestionStudent : AppCompatActivity() {
                     var success= controller!!.Qinsertnewrate(currentquestion.coursenum,currentquestion.lessonnum,currentquestion.questionnum,useremail!!,0!!)
                     if(success)
                     {
-                        myview.upvotebtn.setTextColor(Color.BLACK)
-                        myview.downvotebtn2.setTextColor(Color.BLACK)
+                        getQuestions()
+                        notifyDataSetChanged()
                     }
 
                 }

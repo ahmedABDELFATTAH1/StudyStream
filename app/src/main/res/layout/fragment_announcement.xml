@@ -10,16 +10,13 @@
 
     <Button
         android:id="@+id/AddAnnouncment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="AddAnnouncement" />
+        style="@style/ListViewButton"
+        android:text="Add a new Announcement" />
 
     <ListView
         android:id="@+id/AnnouncementList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        style="@style/ListViewStyle"
+        android:layout_marginTop="5dp">
 
     </ListView>
 

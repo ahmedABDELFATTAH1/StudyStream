@@ -1,46 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".newLesson">
+    tools:context=".LESSONS.AddLesson">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/lesson_Title_EditText"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="178dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/lesson_Title_EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="137dp" />
+            <TextView
+                style="@style/LayoutTitle"
+                android:layout_gravity="start"
+                android:text="Add a Lesson:" />
 
-    <Button
-        android:id="@+id/lesson_New_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="148dp"
-        android:onClick="NewLesson"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lesson_Title_EditText" />
-</LinearLayout>
+            <EditText
+                android:id="@+id/lesson_Title_EditText"
+                android:hint="Lesson's title."
+                style="@style/EditTextStyle"
+                android:maxLines="1"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/lesson_New_btn"
+                style="@style/Button"
+                android:onClick="NewLesson"
+                android:text="Add" />
+
+        </LinearLayout>
+    </ScrollView>

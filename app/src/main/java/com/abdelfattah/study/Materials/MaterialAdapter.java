@@ -31,6 +31,9 @@ public class MaterialAdapter extends ArrayAdapter {
         }
         TextView title = (TextView)ListItemView.findViewById(R.id.Material_Ticket_Title);
         title.setText(Item.GetTitle());
+
+        TextView content = (TextView)ListItemView.findViewById(R.id.Material_Ticket_Content);
+        content.setText(Item.GetContent());
         return  ListItemView;
     }
 }

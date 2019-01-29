@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mytoolbarmain as Toolbar)
         supportActionBar!!.title="Welcome To STUDY STREAM"
     }
+    //if they click on log in
     fun logmain(view:View)
     {
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+    //if they click on sign up
     fun signmain(view:View)
     {
 

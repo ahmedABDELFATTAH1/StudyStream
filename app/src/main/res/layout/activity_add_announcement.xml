@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newAnnouncement"
-    android:orientation="vertical">
+    tools:context=".Announcements.AddAnnouncement">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/new_Announcement_Title_EditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
-    <EditText
-        android:id="@+id/new_Announcement_Content_EditText"
-        android:layout_width="283dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="268dp" />
 
-    <EditText
-        android:id="@+id/new_Announcement_Title_EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="132dp" />
+        <TextView
+            style="@style/LayoutTitle"
+            android:text="Add a New Announcement"
+            android:textSize="19sp"/>
 
-    <Button
-        android:id="@+id/new_Announcement_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Add"
-        tools:layout_editor_absoluteX="148dp"
-        android:onClick="AddAnnouncement"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title:"
+                style="@style/EditTextTitle"/>
+
+            <EditText
+                android:id="@+id/new_Announcement_Title_EditText"
+                style="@style/EditTextStyle"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:hint="Announcement's title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EditTextTitle"
+                android:text="Content:"/>
+
+            <EditText
+                style="@style/EditTextStyle"
+                android:id="@+id/new_Announcement_Content_EditText"
+                android:ems="10"
+                android:gravity="top"
+                android:minLines="4"
+                android:maxLines="8"
+                android:inputType="textMultiLine"
+                android:hint="What's up?"/>
+
+            <Button
+                android:id="@+id/new_Announcement_btn"
+                style="@style/Button"
+                android:onClick="AddAnnouncement"
+                android:text="Add" />
+
+        </LinearLayout>
+        </LinearLayout>
+    </ScrollView>

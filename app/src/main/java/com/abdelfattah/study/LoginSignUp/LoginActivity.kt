@@ -22,8 +22,13 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar!!.title="LOGIN"
         Doctorinfo.email="Unknown"
         Studentinfo.Studentemail="Unknown"
+       //controller!!.enable()
     }
 
+//take email and pass word
+//check if they put it
+// make sure it's exists
+// see if it is a doctor or student and then go to doctor/studen activities
     fun loginevent(view:View) {
         Doctorinfo.email="Unknown"
         Studentinfo.Studentemail="Unknown"
@@ -48,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
                Doctorinfo.Secondname=UserCursor.getString(3)
                PickedUser.Doctor = true;
                PickedUser.ID = Doctorinfo.email;
-                Toast.makeText(this, "A7la Mesa 3la El so7ab", Toast.LENGTH_LONG).show()
                 var intent = Intent(this, TheDoctor::class.java)
                 startActivity(intent)
 

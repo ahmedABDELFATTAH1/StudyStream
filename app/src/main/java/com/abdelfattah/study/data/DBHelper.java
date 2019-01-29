@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Materials.Column_Date + " DATETIME,"
                 + Materials.Column_Doc_ID + " TEXT ,"
                 + "PRIMARY KEY ("+Materials.Column_Course_Code + "," + Materials.Column_Material_Num + ")"
-                + ", FOREIGN KEY (" + Materials.Column_Course_Code + ") REFERENCES " + Course.Table_Name + ","
+                + ", FOREIGN KEY (" + Materials.Column_Course_Code + ") REFERENCES " + Course.Table_Name + " ON DELETE CASCADE  ,"
                 + "FOREIGN KEY (" + Materials.Column_Doc_ID + ") REFERENCES " + Doctor.Column_ID
                 +  ")";
         db.execSQL(SQL_CREATE_Materials);
@@ -78,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Announcements.Column_Date + " DATETIME ,"
                 + Announcements.Column_Doc_ID + " TEXT ,"
                 + "PRIMARY KEY (" + Announcements.Column_Course_Code + "," + Announcements.Column_Announcement_Num + ")"
-                + ",FOREIGN KEY (" + Announcements.Column_Course_Code + ") REFERENCES " + Course.Table_Name + ","
+                + ",FOREIGN KEY (" + Announcements.Column_Course_Code + ") REFERENCES " + Course.Table_Name + "  ON DELETE CASCADE ,"
                 + "FOREIGN KEY (" + Announcements.Column_Doc_ID + ") REFERENCES " + Doctor.Column_ID
                 +  ")";
         db.execSQL(SQL_CREATE_Announcements);
@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Lesson.Column_Title + " TEXT NOT NULL ,"
                 + "PRIMARY KEY (" + Lesson.Column_Course_Code + ", " + Lesson.Column_Lesson_Num + " ), "
                 + "FOREIGN KEY (" + Lesson.Column_Course_Code + ") REFERENCES " + Course.Table_Name
-                +  ")";
+                +  "  ON DELETE CASCADE )";
         db.execSQL(SQL_CREATE_Lesson);
 
         final String SQL_CREATE_Questions = "CREATE TABLE " + Questions.Table_Name + "( "
@@ -102,7 +102,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Questions.Column_Date + " DATETIME,"
                 + "PRIMARY KEY (" + Questions.Column_Course_Code + "," + Questions.Column_Question_Num + "," + Questions.Column_Lesson_Num +  ")"
                 + ",FOREIGN KEY (" + Questions.Column_Course_Code + "," + Questions.Column_Lesson_Num +" ) REFERENCES "
-                + Lesson.Table_Name + "(" + Lesson.Column_Course_Code + "," + Lesson.Column_Lesson_Num + ")" + ","
+                + Lesson.Table_Name + "(" + Lesson.Column_Course_Code + "," + Lesson.Column_Lesson_Num + ") ON DELETE CASCADE ,"
                 + "FOREIGN KEY (" + Questions.Column_Stud_ID + ") REFERENCES " + Student.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_Questions);
@@ -117,10 +117,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Answers.Column_Content + " TEXT NOT NULL ,"
                 + Answers.Column_Date + " DATETIME,"
                 + "PRIMARY KEY (" +Answers.Column_Course_Code +","+ Answers.Column_Question_Num + "," + Answers.Column_Answer_Num + "," + Answers.Column_Lesson_Num +  ")"
-                + ",FOREIGN KEY (" + Answers.Column_Course_Code + " , " + Answers.Column_Lesson_Num +" ) REFERENCES "
-                + Lesson.Table_Name + "(" + Lesson.Column_Course_Code + "," + Lesson.Column_Lesson_Num + ")" + ","
+                + ",FOREIGN KEY (" + Answers.Column_Course_Code + " , " + Answers.Column_Lesson_Num +" , "+Answers.Column_Question_Num+" ) REFERENCES "
+                + Questions.Table_Name + "(" + Questions.Column_Course_Code + "," + Questions.Column_Lesson_Num +" , "+ Questions.Column_Question_Num+")"
+                +" ON DELETE CASCADE ,"
                 + "FOREIGN KEY (" + Answers.Column_User_ID + ") REFERENCES " + UserEntry.Table_Name
-                + ",FOREIGN KEY (" + Answers.Column_Question_Num + ") REFERENCES " + Answers.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_Answers);
 
@@ -129,7 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + STUD_COURSE.Column_Stud_ID + " TEXT NOT NULL ,"
                 + "PRIMARY KEY (" + STUD_COURSE.Column_Course_Code + "," + STUD_COURSE.Column_Stud_ID + ")"
                 + ",FOREIGN KEY (" + STUD_COURSE.Column_Course_Code+") REFERENCES "
-                + Course.Table_Name
+                + Course.Table_Name+" ON DELETE CASCADE  "
                 + ", FOREIGN KEY (" + STUD_COURSE.Column_Stud_ID + ") REFERENCES " + Student.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_STUD_COURSE);
@@ -142,6 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "PRIMARY KEY (" + LESSON_STUD.Column_Course_Code +"," + LESSON_STUD.Column_Lesson_Num+ "," + LESSON_STUD.Column_Stud_ID+ ")"
                 + ",FOREIGN KEY (" + LESSON_STUD.Column_Course_Code + "," + LESSON_STUD.Column_Lesson_Num +") REFERENCES "
                 + Lesson.Table_Name + "(" + Lesson.Column_Course_Code + "," + Lesson.Column_Lesson_Num + ")"
+                +" ON DELETE CASCADE "
                 + ", FOREIGN KEY (" + LESSON_STUD.Column_Stud_ID +") REFERENCES " + Student.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_LESSON_STUD);
@@ -155,6 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "," + USER_VOTE_QUESTION.Column_USER_ID +")"
                 + ", FOREIGN KEY (" + USER_VOTE_QUESTION.Column_Course_Code + "," + USER_VOTE_QUESTION.Column_Lesson_Num + "," + USER_VOTE_QUESTION.Column_Question_Num +") REFERENCES "
                 + Questions.Table_Name + "(" + Questions.Column_Course_Code + "," + Questions.Column_Lesson_Num + "," + Questions.Column_Question_Num +  ")"
+                +" ON DELETE CASCADE "
                 + ", FOREIGN KEY (" + USER_VOTE_QUESTION.Column_USER_ID +") REFERENCES " + UserEntry.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_USER_VOTE_QUESTION);
@@ -170,6 +172,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "," +USER_VOTE_ANSWERS.Column_Answer_Num + "," + USER_VOTE_ANSWERS.Column_USER_ID +")"
                 + ", FOREIGN KEY (" + USER_VOTE_ANSWERS.Column_Course_Code + "," + USER_VOTE_ANSWERS.Column_Question_Num + "," + USER_VOTE_ANSWERS.Column_Answer_Num +","+ USER_VOTE_ANSWERS.Column_Lesson_Num +") REFERENCES "
                 + Answers.Table_Name + "(" +Answers.Column_Course_Code + "," + Answers.Column_Question_Num + "," + Answers.Column_Answer_Num +","+ Answers.Column_Lesson_Num +  ")"
+                +"  ON DELETE CASCADE "
                 + ", FOREIGN KEY (" + USER_VOTE_ANSWERS.Column_USER_ID +") REFERENCES " + UserEntry.Table_Name
                 +  ")";
         db.execSQL(SQL_CREATE_USER_VOTE_ANSWERS);
@@ -203,6 +206,23 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
        int NumberOfRowAffected= db.update(tablename, contentValues, whreclause, Argument);
        return NumberOfRowAffected!=0;
+    }
+    public Boolean delete(String tablename,String Argument[],String whereclause)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = ON");
+        return db.delete(tablename,whereclause,Argument)>0;
+    }
+    public Boolean deleteWithoutCascade(String tablename,String Argument[],String whereclause)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.delete(tablename,whereclause,Argument)>0;
+    }
+
+    public void enable()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = ON");
     }
 
 }

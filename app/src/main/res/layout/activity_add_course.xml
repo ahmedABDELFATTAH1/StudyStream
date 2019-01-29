@@ -1,73 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".COURSE.AddCourse">
 
-    <EditText
-        android:id="@+id/CourseCodeText"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="CourseCode"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/CoursePassText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="CoursePass"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseCodeText" />
+        <TextView
+            style="@style/LayoutTitle"
+            android:text="Add a Course" />
 
-    <EditText
-        android:id="@+id/CourseTilteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:ems="10"
-        android:hint="CourseTitle"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CoursePassText" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/CourseDiscText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="CoursrDisc"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseTilteText" />
+            <TextView
+                style="@style/EditTextTitle"
+                android:text="Course ID:" />
 
-    <Button
-        android:id="@+id/ADDCourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="ADDCOURSEEVENT"
-        android:text="ADDCOURSE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseDiscText" />
-</android.support.constraint.ConstraintLayout>
+            <EditText
+                android:id="@+id/CourseCodeText"
+                style="@style/EditTextStyle"
+                android:hint="Ex. 201"
+                android:inputType="number" />
+
+            <TextView
+                style="@style/EditTextTitle"
+                android:text="Course Title:" />
+
+            <EditText
+                android:id="@+id/CourseTilteText"
+                style="@style/EditTextStyle"
+                android:hint="Ex. Database Systems"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/EditTextTitle"
+                android:text="Password:" />
+
+            <EditText
+                android:id="@+id/CoursePassText"
+                style="@style/EditTextStyle"
+                android:hint="Required to join the course."
+                android:inputType="textPersonName|number" />
+
+            <TextView
+                style="@style/EditTextTitle"
+                android:text="Description:" />
+
+            <EditText
+                android:id="@+id/CourseDiscText"
+                style="@style/EditTextStyle"
+                android:hint="Give a hint about the course. (Optional)"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:minLines="3" />
+
+            <Button
+                android:id="@+id/ADDCourse"
+                style="@style/Button"
+                android:onClick="ADDCOURSEEVENT"
+                android:text="ADD" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

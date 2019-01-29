@@ -27,12 +27,10 @@ var controller:Controller?=null
         if(success)
         {
 
-            Toast.makeText(this,"inset question succesffuly",Toast.LENGTH_SHORT).show()
             finish()
 
         }
         else{
-
             Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()
         }
 

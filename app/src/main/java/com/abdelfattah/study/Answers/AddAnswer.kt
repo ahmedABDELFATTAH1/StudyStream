@@ -41,7 +41,6 @@ class AddAnswer : AppCompatActivity() {
        if(success)
         {
 
-            Toast.makeText(this,"inset Answer succesffuly", Toast.LENGTH_SHORT).show()
            finish()
 
        }

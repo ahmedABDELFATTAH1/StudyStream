@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import com.abdelfattah.study.CourseMainMenu.Fragments.MainCourseDoctor
+import com.abdelfattah.study.Course_Stastics_Doc.Course_Statistics_Doc
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.LoginSignUp.Studentinfo
 import com.abdelfattah.study.LoginSignUp.MainActivity
+import com.abdelfattah.study.LoginSignUp.editPassword
 import com.abdelfattah.study.Questions.QuestionStudent
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
@@ -43,7 +45,7 @@ class TheStudent : AppCompatActivity() {
         startActivity(intent)
 
     }
-    fun getCourse()
+    fun getCourse()//get all course from the data base and assign it to Listofcourses
     {
         ListOfCourses!!.clear()
         var cursor=controller!!.JoindedCourses(Studentinfo.Studentemail!!)
@@ -60,7 +62,7 @@ class TheStudent : AppCompatActivity() {
             ListOfCourses!!.add(CourseStudent(Courscode,Coursetitle,CourseDesc,DoctorID,Coursepass))
             Isnotempty=cursor.moveToNext()
         }
-
+    cursor.close()
     }
 
     override fun onRestart() {
@@ -74,7 +76,7 @@ class TheStudent : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.mainmenu,menu)
-
+        menu!!.findItem(R.id.statisticsbtn).setVisible(false);
         return true
     }
 
@@ -82,10 +84,16 @@ class TheStudent : AppCompatActivity() {
         super.onOptionsItemSelected(item)
         if(item!!.itemId== R.id.logoutbtn)
         {
-            Toast.makeText(this,"Hantala3k barra 7ader shoukrn ya mo7trm", Toast.LENGTH_LONG).show()
-            var intent= Intent(this, MainActivity::class.java)
+            var intent=Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        if(item!!.itemId== R.id.changePassbtn)
+        {
+            var intent=Intent(this, editPassword::class.java)
+            startActivity(intent)
+        }
+
 
         return true
     }
@@ -100,8 +108,7 @@ class TheStudent : AppCompatActivity() {
                 myview.coursetitle.text=currentcourse.Title
                 myview.coursedisc.text= currentcourse.Desc
                 myview.doctorid.text=currentcourse.Doctor_ID
-            myview.setOnClickListener {
-                Toast.makeText(applicationContext,position.toString(), Toast.LENGTH_LONG).show()
+            myview.setOnClickListener {//if they clicked  on any course got to (lessons/materials/announcements)
                 PickedCourse.Code=currentcourse.Course_Code
                 PickedCourse.password=currentcourse.password
                 PickedCourse.Description=currentcourse.Desc
@@ -110,6 +117,14 @@ class TheStudent : AppCompatActivity() {
                 var intent=Intent(applicationContext, MainCourseDoctor::class.java)
                 startActivity(intent)
             }
+            myview.UnSubscribeCoursebtn.setOnClickListener {
+                controller!!.UNSubscribeCourse(currentcourse.Course_Code,Studentinfo.Studentemail!!)
+                getCourse()
+                notifyDataSetChanged()
+
+            }
+
+
                 return myview
         }
 

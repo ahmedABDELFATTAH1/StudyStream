@@ -4,5 +4,11 @@
 
     <item
         android:id="@+id/logoutbtn"
-        android:title="logout" />
+        android:title="Logout" />
+    <item
+        android:id="@+id/statisticsbtn"
+        android:title="Courses Info" />
+    <item
+        android:id="@+id/changePassbtn"
+        android:title="Change password" />
 </menu>

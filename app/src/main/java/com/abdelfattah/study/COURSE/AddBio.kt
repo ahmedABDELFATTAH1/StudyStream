@@ -42,7 +42,7 @@ class AddBio : AppCompatActivity() {
         }
         else{
 
-            Toast.makeText(this,"Am I A Joke To You!!!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"PLEASE FILL AL FIELDS !!!",Toast.LENGTH_SHORT).show()
         }
 
 

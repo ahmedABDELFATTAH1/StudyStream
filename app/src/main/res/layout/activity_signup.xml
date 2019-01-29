@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,44 +9,43 @@
         android:id="@+id/mytoolbarsignup"
         layout="@layout/app_bar_layout" />
 
-    <RelativeLayout
-        android:id="@+id/LoginLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="56dp">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/app_icon" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:contentDescription="App Icon"
+                android:src="@drawable/app_icon" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Register As:" />
 
                 <RadioButton
                     android:id="@+id/Doctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="30dp"
-                    android:text="Doctor" />
+                    android:layout_marginRight="5dp"
+                    android:text="Professor" />
 
                 <RadioButton
                     android:id="@+id/Student"
@@ -57,87 +55,69 @@
 
             </RadioGroup>
 
-
-            <EditText
-                android:id="@+id/emailtxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="7dp"
-                android:gravity="center"
-                android:hint="Email"
-                android:maxLines="1" />
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/fnametxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:hint="First Name"
+                    android:id="@+id/emailtxt"
+                    android:inputType="textEmailAddress"
+                    style="@style/EditTextStyle"
+                    android:layout_width="260dp"
+                    android:hint="Email"
+                    android:maxLines="1" />
+
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/fnametxt"
+                        style="@style/EditTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="First Name"
+                        android:maxLines="1" />
+
+                    <EditText
+                        android:id="@+id/snametxt"
+                        style="@style/EditTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:hint="Last Name"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/passtxt"
+                    style="@style/EditTextStyle"
+                    android:layout_width="260dp"
+                    android:hint="Password"
+                    android:inputType="numberPassword"
                     android:maxLines="1" />
 
                 <EditText
-                    android:id="@+id/snametxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:hint="Last Name"
+                    android:id="@+id/repasstxt"
+                    style="@style/EditTextStyle"
+                    android:layout_width="260dp"
+                    android:hint="Re-enter Password"
+                    android:inputType="numberPassword"
                     android:maxLines="1" />
+
+                <Button
+                    android:id="@+id/signupbtn"
+                    style="@style/Button"
+                    android:onClick="signupevent"
+                    android:text="Sign Up" />
 
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/passtxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="30dp"
-                android:gravity="center"
-                android:hint="Password"
-                android:maxLines="1" />
-
-            <EditText
-                android:id="@+id/repasstxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="30dp"
-                android:gravity="center"
-                android:hint="Re-enter Password"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-
-
         </LinearLayout>
 
-        <Button
-            android:id="@+id/signupbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:onClick="signupevent"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="Sign Up" />
-
-
-    </RelativeLayout>
-
+    </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>

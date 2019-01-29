@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".COURSE.AddBio">
 
-    <Button
-        android:id="@+id/AddBioBtn"
-        android:layout_width="163dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:onClick="AddEvent"
-        android:text="AddEditBio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editbiotext"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/AddBioBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            style="@style/LayoutTitle"
+            android:layout_gravity="start"
+            android:text="Edit Your Bio:"/>
+
+        <EditText
+            android:id="@+id/editbiotext"
+            style="@style/EditTextStyle"
+            android:ems="10"
+            android:hint="Give a quick hint about yourself."
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:maxLines="8"/>
+
+        <Button
+            android:id="@+id/AddBioBtn"
+            style="@style/Button"
+           android:onClick="AddEvent"
+            android:text="Save" />
+
+
+    </LinearLayout>
+
+</ScrollView>

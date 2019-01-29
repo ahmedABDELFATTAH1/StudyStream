@@ -59,6 +59,29 @@ public class Controllerjava {
     }
     //endregion
 
+    //region Selecting a specific material , announcement
+    public Cursor SelectMaterial(int courseCode , String matTitle)
+    {
+        //select * from Announcements where Course_Code = course_code AND Material_title=matTitle
+        String query="Select * from "+Materials.Table_Name+ " where "+Materials.Column_Course_Code+" = "
+                + courseCode + " AND " + Materials.Column_Title + " = "+ matTitle ;
+
+        Cursor cursor=db.getReadableDatabase().rawQuery(query,null);
+        return cursor;
+
+    }
+    public Cursor SelectAnnouncement(int courseCode , String annTitle )
+    {
+        //select * from Announcements where Course_Code = course_code AND Ann_Title = annTitle
+        String query="Select * from "+Announcements.Table_Name+ " where "+Announcements.Column_Course_Code+" = "
+                + courseCode + " AND " + Announcements.Column_Title + " = "+ annTitle ;
+
+        Cursor cursor=db.getReadableDatabase().rawQuery(query,null);
+        return cursor;
+
+    }
+    //endregion
+
     //region inserting Lessons,Announcements,Materials
 
     //Inserting a new announcement
@@ -111,10 +134,61 @@ public class Controllerjava {
 
     //endregion
 
+    //region update materials , announcements
+
+    public void UpdateMaterial(int courseCode,int matNum,String title , String content)
+    {
+        //update Materials Set Mat_Title=title , Content=content where Course_Code=courseCode AND Material_Num=matNum
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Materials.Column_Title,title);
+        contentValues.put(Materials.Column_Content,content);
+
+        String whereclause = Materials.Column_Course_Code + " =? AND "
+                + Materials.Column_Material_Num + " =?";
+        String[] arguments = {String.valueOf(courseCode),String.valueOf(matNum)};
+        db.update(Materials.Table_Name,contentValues,arguments,whereclause);
+    }
+    public void UpdateAnnouncement(int courseCode,int annNum,String title , String content)
+    {
+        //update Announcement Set Ann_Title=title , Content=content where Course_Code=courseCode AND Ann=annNum
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Announcements.Column_Title,title);
+        contentValues.put(Announcements.Column_Content,content);
+
+        String whereclause = Announcements.Column_Course_Code + " =? AND "
+                + Announcements.Column_Announcement_Num + " =?";
+        String[] arguments = {String.valueOf(courseCode),String.valueOf(annNum)};
+        db.update(Announcements.Table_Name,contentValues,arguments,whereclause);
+    }
+
+    //endregion
+
+    //region delete materials , announcements
+
+    public void DeleteMaterials(int courseCode , int matNum)
+    {
+        //Delete From Materials where CourseCode = courseCode AND Mat_Num=matNum
+        String whereclause = Materials.Column_Course_Code + " =? AND "
+                + Materials.Column_Material_Num + " =?";
+        String[] arguments = {String.valueOf(courseCode),String.valueOf(matNum)};
+        db.deleteWithoutCascade(Materials.Table_Name,arguments,whereclause);
+    }
+    public void DeleteAnnouncement(int courseCode , int matNum)
+    {
+        //Delete From Announcements where CourseCode = courseCode AND Ann_Num=annNum
+        String whereclause = Announcements.Column_Course_Code + " =? AND "
+                + Announcements.Column_Announcement_Num + " =?";
+        String[] arguments = {String.valueOf(courseCode),String.valueOf(matNum)};
+        db.deleteWithoutCascade(Announcements.Table_Name,arguments,whereclause);
+    }
+
+    //endregion
+
     //region checking Announcements,Materials,Lessons titles
     //checking if there is an announcement with the same name as title
     public boolean CheckAnnouncement(String title , int CourseCode)
     {
+        //Select * from Anouncements where Title=title AND Course_Code = CourseCode
         String query = "select * from " + Announcements.Table_Name
                 + " where " + Announcements.Column_Title + " = '" + title + "'  And " + Announcements.Column_Course_Code
                 + " = " + CourseCode;
@@ -131,6 +205,7 @@ public class Controllerjava {
     //checking if there is a material with the same name as title
     public boolean CheckMaterial(String title , int CourseCode)
     {
+        //Select * from Materials where Title=title AND Course_Code = CourseCode
         String query = "select * from " + Materials.Table_Name
                 + " where " + Materials.Column_Title + " = '" + title + "'  And " + Materials.Column_Course_Code
                 + " = " + CourseCode;
@@ -148,6 +223,7 @@ public class Controllerjava {
     //checking if there is a lesson with the same name as title
     public boolean CheckLesson(String title , int CourseCode)
     {
+        //Select * from Lessons where Title=title AND Course_Code = CourseCode
         String query = "select * from " + Lesson.Table_Name
                 + " where " + Lesson.Column_Title + " = '" + title + "'  And " + Lesson.Column_Course_Code
                 + " = " + CourseCode;
@@ -161,6 +237,7 @@ public class Controllerjava {
             return false;
     }
     //#endregion
+
 
     //region Getting a new Id for Lessons,Announcements,Materials
     public int NewAnnouncementID(int CourseCode)
@@ -199,6 +276,83 @@ public class Controllerjava {
         mCount.close();
         return maxID + 1;
     }
+
+    //endregion
+
+    //region Getting The Number of Students,Lessons,Announcements,Materials,Questions,Answer per course
+
+
+    //Get number of  Lessons in a specific course
+    public int GetNumberOfLessons(int CourseNum)
+    {
+        //Select Count(*) from Lessons where Course_Code = CourseNum
+        String query="Select count(*) from "+Lesson.Table_Name + " where "+ Lesson.Column_Course_Code+" =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of Lessons
+        return  count;
+    }
+    //Get number of  Announcements in a specific course
+    public int GetNumberOfAnnouncements(int CourseNum)
+    {
+        //Select Count(*) from Announcement where Course_Code = CourseNum
+        String query="Select count(*) from "+Announcements.Table_Name + " where "+ Announcements.Column_Course_Code + " =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of annoucements
+        return  count;
+    }
+
+    //Get number of  Materials in a specific course
+    public int GetNumberOfMaterials(int CourseNum)
+    {
+        //Select Count(*) from Materials where Course_Code = CourseNum
+        String query="Select count(*) from "+Materials.Table_Name + " where "+ Materials.Column_Course_Code+" =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of Materials
+        return  count;
+    }
+
+    //Get number of  Questions in a specific course
+    public int GetNumberOfQuestions(int CourseNum)
+    {
+        //Select Count(*) from Questions where Course_Code = CourseNum
+        String query="Select count(*) from "+Questions.Table_Name + " where "+ Questions.Column_Course_Code+" =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of Questions
+        return  count;
+    }
+
+
+    //Get number of  Students in a specific course
+    public int GetNumberOfStudents(int CourseNum)
+    {
+        //Select Count(*) from Students where Course_Code = CourseNum
+        String query="Select count(*) from "+STUD_COURSE.Table_Name + " where "+ STUD_COURSE.Column_Course_Code+" =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of Students
+        return  count;
+    }
+    //Get number of  Students in a specific course
+    public int GetNumberOfAnswers(int CourseNum)
+    {
+        //Select Count(*) from Answers where Course_Code = CourseNum
+        String query="Select count(*) from "+Answers.Table_Name + " where "+ Answers.Column_Course_Code+" =? ";
+        String[] Argument = {String.valueOf(CourseNum)};
+        Cursor cursor=db.Select(query,Argument);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0); //getting count of Answers
+        return  count;
+    }
+
 
     //endregion
 
@@ -288,6 +442,32 @@ public class Controllerjava {
 
 
 
+    //endregion
+
+    //region Top students operations
+    public Cursor GetTopStudents(int CourseCode)
+    {
+        //Select A.User_ID , SUM(RATING) AS RATING
+        //from USER_VOTE_ANSWER AS UA ,ANSWER AS A
+        //where A.Course_Code = CourseCode
+        //AND   A.Course_Code = UA.Course_Code
+        //AND   A.Lesson_Number=UA.Lesson_Number
+        //AND   A.Question_Number=UA.Question_Number
+        //AND   A.Answer_Number = UA.Answer_Number
+        //group by User_ID
+        //order by Rating desc
+        String query = "Select A." + Answers.Column_User_ID
+                + " ,SUM("+USER_VOTE_ANSWERS.Column_Rating+") AS RATING" +" from "+USER_VOTE_ANSWERS.Table_Name
+                +" AS UA , " + Answers.Table_Name + " AS A Where A."
+                + Answers.Column_Course_Code +" = " +CourseCode
+                +" AND UA."+ USER_VOTE_ANSWERS.Column_Course_Code + " = "+CourseCode
+                +" AND A." +Answers.Column_Lesson_Num +" = UA."+ USER_VOTE_ANSWERS.Column_Lesson_Num
+                +" AND A." +Answers.Column_Question_Num + " = UA."+USER_VOTE_ANSWERS.Column_Question_Num
+                +" AND A." +Answers.Column_Answer_Num + " = UA."+USER_VOTE_ANSWERS.Column_Answer_Num
+                + " group by A."+Answers.Column_User_ID + " ORDER BY RATING desc";
+
+        return db.Select(query,null);
+    }
     //endregion
 
 

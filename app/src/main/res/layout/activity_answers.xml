@@ -9,13 +9,12 @@
 
     <Button
         android:id="@+id/AddAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/ListViewButton"
         android:onClick="AddAnswerEvent"
-        android:text="AddAnswers" />
+        android:text="Add a new Answer" />
 
     <ListView
         android:id="@+id/AnswersList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        style="@style/ListViewStyle" />
+
 </LinearLayout>

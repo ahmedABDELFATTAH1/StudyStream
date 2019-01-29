@@ -5,20 +5,59 @@
     android:id="@+id/Linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/edittext_roundedcorners"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/coursetitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/course"
+        android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/coursedisc"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
 
-    <TextView
-        android:id="@+id/doctorid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/coursetitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Course Title"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/UnSubscribeCoursebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                app:srcCompat="@drawable/delete" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/doctorid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Professor"
+            android:textStyle="italic"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/coursedisc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Course Disc"
+            android:textColor="@color/middlegrey"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
 </LinearLayout>

@@ -10,16 +10,12 @@
 
     <Button
         android:id="@+id/AddMaterials"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Addmaterials" />
+        style="@style/ListViewButton"
+        android:text="Add material" />
 
     <ListView
         android:id="@+id/MaterialstList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        style="@style/ListViewStyle">
 
     </ListView>
 

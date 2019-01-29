@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import com.abdelfattah.study.CourseMainMenu.Fragments.MainCourseDoctor
+import com.abdelfattah.study.Course_Stastics_Doc.Course_Statistics_Doc
 import com.abdelfattah.study.data.CourseStudent
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
 import com.abdelfattah.study.LoginSignUp.MainActivity
+import com.abdelfattah.study.LoginSignUp.editPassword
 import com.abdelfattah.study.R
 import com.abdelfattah.study.data.Controller
 import com.abdelfattah.study.data.StudyStreamContract
@@ -51,12 +53,22 @@ class TheDoctor : AppCompatActivity() {
 }
 
 
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         super.onOptionsItemSelected(item)
         if(item!!.itemId== R.id.logoutbtn)
         {
-            Toast.makeText(this,"Hantala3k barra 7ader shoukrn ya mo7trm",Toast.LENGTH_LONG).show()
             var intent=Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        if(item!!.itemId== R.id.statisticsbtn)
+        {
+            var intent=Intent(this, Course_Statistics_Doc::class.java)
+            startActivity(intent)
+        }
+        if(item!!.itemId== R.id.changePassbtn)
+        {
+            var intent=Intent(this, editPassword::class.java)
             startActivity(intent)
         }
 
@@ -68,10 +80,10 @@ fun GetMadeCourses()
     ListOfMadeCourses!!.clear()
     var cursor=controller!!.MadeCourses(Doctorinfo.email!!)
     var Isnotempty:Boolean=cursor.moveToFirst()
-   //   Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
+
     while (Isnotempty)
     {
-    //    Toast.makeText(this,"Please enter your email and password first",Toast.LENGTH_SHORT).show()
+
         var Courscode=cursor.getInt(cursor.getColumnIndex(StudyStreamContract.Course.Column_Code))
         var Coursetitle=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Course.Column_Title))
         var CourseDesc=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Course.Column_Description))
@@ -103,6 +115,7 @@ fun ADDCOURSEEVENT(view: View)
         super.onRestart()
         GetMadeCourses()
         adapter!!.notifyDataSetChanged()
+        GetBio()
 
     }
     inner class CourseAdabterlist(): BaseAdapter()
@@ -125,6 +138,7 @@ fun ADDCOURSEEVENT(view: View)
                 var intent=Intent(applicationContext,MainCourseDoctor::class.java)
                 startActivity(intent)
             }
+
             return myview
         }
 

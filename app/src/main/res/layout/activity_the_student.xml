@@ -15,17 +15,12 @@
 
     <ListView
         android:id="@+id/SCourseList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </ListView>
+        style="@style/ListViewStyle"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/joinCbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
+        style="@style/ListViewButton"
         android:onClick="JoinEvent"
         android:text="Join Course" />
 

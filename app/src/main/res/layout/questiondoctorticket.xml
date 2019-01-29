@@ -1,62 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/edittext_roundedcorners"
+    android:padding="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/downvotebtn2"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/question" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Qtitletext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Question's Title"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/QDatetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="date"
+                    android:textColor="@color/middlegrey"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Qcontenttext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="DVote" />
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:minLines="3"
+            android:text="Question?"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/norating"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/deletequestionbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="norating" />
-
-        <Button
-            android:id="@+id/upvotebtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="UpVote" />
+            android:background="@color/white"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageView
+            android:id="@+id/upvotebtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/upvote" />
 
         <TextView
             android:id="@+id/rateText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/downvotebtn2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/downvote" />
+
+        <ImageView
+            android:id="@+id/norating"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/novote" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/QDatetext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/Qtitletext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/Qcontenttext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
 </LinearLayout>

@@ -18,9 +18,8 @@ class Controller {
     constructor(context:Context)
     {
         db= DBHelper(context)
-
-
     }
+
     fun checkuser(email:String,pass:String):Boolean
     {
         var query="Select * from  "+ UserEntry.Table_Name +" where "+ UserEntry.Column_ID+" =? And "+UserEntry.Column_Password+" =?"
@@ -28,6 +27,7 @@ class Controller {
         var Cursor=db!!.Select(query,Argument)
         return Cursor.count>0
     }
+    //check if the user email already used or not(must be uniqe)
     fun checkuserid(email:String):Boolean
     {
         var query="Select * from  "+ UserEntry.Table_Name +" where "+ UserEntry.Column_ID+" =?"
@@ -35,6 +35,20 @@ class Controller {
         var Cursor=db!!.Select(query,Argument)
         return Cursor.count>0
     }
+
+    //update password /nassar part
+    fun UpdatePass(Useremail:String,Pass:Int):Boolean
+    {
+        var contentval = ContentValues()
+        contentval.put(UserEntry.Column_Password,Pass.toInt())
+        var whereclause=UserEntry.Column_ID+" =? "
+        var argument= arrayOf(Useremail)
+        var success= db!!.update(UserEntry.Table_Name,contentval,argument,whereclause)
+        return success
+    }
+
+
+    //check if the user is a doctor or student
     fun checkkind(email: String):Boolean
     {
         var query="Select * from "+ Doctor.Table_Name+" where "+Doctor.Column_ID +"=? "
@@ -42,6 +56,8 @@ class Controller {
         var Cursor=db!!.Select(query,Argument)
         return Cursor.count>0
     }
+
+    //get all the user data from his email(uniqe id)
     fun UserData(email: String):Cursor
     {
 
@@ -51,6 +67,13 @@ class Controller {
         Cursor.moveToFirst()
         return Cursor
     }
+
+   /*
+    1-check if the user already exist if yes return false
+    2-insert the user data in the base table
+    3-check if doctor insert in the doctor table the same for the student
+    4-return true(success)
+ */
     fun insertuser(isDoctor:Boolean,Email:String,Firstname:String,Secondname:String,pass:String):Boolean
     {
         var content=ContentValues()
@@ -86,6 +109,7 @@ class Controller {
 
 
     }
+    //get all courses that the student has joind
     fun JoindedCourses(studentemail:String):Cursor
     {
 
@@ -94,7 +118,7 @@ class Controller {
         var cursor=db!!.Select(query,argument)
         return cursor
     }
-
+//get all courses that the doctor has created
     fun MadeCourses(Doctorid:String):Cursor
     {
         var query="Select * from "+Course.Table_Name+" where "+Course.Column_Doc_ID+" =? "
@@ -103,22 +127,20 @@ class Controller {
         return cursor
 
     }
-
+    //return true if this course code already exists
     fun IsUsedCourseCode(CourseCode:String):Boolean
     {
         var query="Select * from "+Course.Table_Name+" where "+Course.Column_Code+" =? "
         var Argument= arrayOf(CourseCode)
         var cursor=db!!.Select(query,Argument)
         return cursor.count>0
-
-
-
     }
+    //insert a new course to the data base
     fun InsertNewCourse(tablename:String,contentval:ContentValues):Boolean
     {
       return  db!!.insert(tablename,contentval)
     }
-
+    //return true if the student entered an existing course information ----> join course
     fun FindCourse(coursecode:String,coursevalues:String):Boolean
     {
       var query="Select * from "+Course.Table_Name+" where "+Course.Column_Code+" =? and "+ Course.Column_Password+" =? "
@@ -126,6 +148,8 @@ class Controller {
        var cursor= db!!.Select(query,Argument)
         return cursor.count>0
     }
+
+    //join course
     fun joincourse(coursecode:String):Boolean
       {
           var contentvalue=ContentValues()
@@ -135,6 +159,7 @@ class Controller {
 
       }
 
+    //insert new Bio for doctor
     fun updateBio(Bio:String):Boolean
     {
        var  contentval=ContentValues()
@@ -148,11 +173,14 @@ class Controller {
        var Argument= arrayOf(Doctorinfo.email)
        var cursor=db!!.Select(query,Argument)
      var tru=  cursor.moveToFirst()
-       if(tru)
-       return cursor.getString(0)
-       else
+       try {
+        return   cursor.getString(0)
+       }catch (e:Exception){}
+
            return "You can add Bio here"
    }
+
+
     fun insertQuestion(lessonnum:Int,Coursenum:Int,StudentId:String,datee:Date,title:String,content:String,Questionnym:Int):Boolean
     {
         var contentvalue=ContentValues()
@@ -172,11 +200,40 @@ class Controller {
         var Argument= arrayOf(lesson_id.toString(),Coursid.toString())
        return db!!.Select(query,Argument)
     }
-    fun getAnswer(lesson_id:Int,Coursid:Int,questionid:Int):Cursor
+    fun getQuestionbystudent(lesson_id:Int,Coursid:Int,studentnumber:String,Qnumber:Int):Boolean
+    {
+        var query="Select * From "+Questions.Table_Name+" Where "+Questions.Column_Lesson_Num+" =? and "+Questions.Column_Course_Code+" =? and "+Questions.Column_Stud_ID+" =? and "+Questions.Column_Question_Num+" =? "
+        var Argument= arrayOf(lesson_id.toString(),Coursid.toString(),studentnumber,Qnumber.toString())
+        var cursor= db!!.Select(query,Argument)
+        return cursor.count>0
+    }
+    fun DelteQuestion(CN:Int,LN:Int,QN:Int):Boolean
+    {
+        var whereclause=Questions.Column_Course_Code+" =? and "+Questions.Column_Lesson_Num+" =? and "+Questions.Column_Question_Num+" =? "
+        var Argument= arrayOf(CN.toString(),LN.toString(),QN.toString())
+        return db!!.delete(Questions.Table_Name,Argument,whereclause)
+
+    }
+    fun getAnswer(Coursid:Int,lesson_id:Int,questionid:Int):Cursor
     {
         var query="Select * From "+Answers.Table_Name+" Where "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Course_Code+" =? and "+Answers.Column_Question_Num+" =? "
         var Argument= arrayOf(lesson_id.toString(),Coursid.toString(),questionid.toString())
         return db!!.Select(query,Argument)
+
+    }
+    fun getAnswerbyuser(Coursid:Int,lesson_id:Int,questionid:Int,Answernum:Int,UserID:String):Boolean
+    {
+        var query="Select * From "+Answers.Table_Name+" Where "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Course_Code+" =? and "+Answers.Column_Question_Num+" =? and "+Answers.Column_Answer_Num+" =? and "+Answers.Column_User_ID+" =? "
+        var Argument= arrayOf(lesson_id.toString(),Coursid.toString(),questionid.toString(),Answernum.toString(),UserID)
+        var cursor= db!!.Select(query,Argument)
+        return cursor.count>0
+    }
+    fun DelteAnswer(CN:Int,LN:Int,QN:Int,AN:Int):Boolean
+    {
+        var whereclause=Answers.Column_Course_Code+" =? and "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Question_Num+" =? and "+Answers.Column_Answer_Num+" =? "
+        var Argument= arrayOf(CN.toString(),LN.toString(),QN.toString(),AN.toString())
+        return db!!.delete(Answers.Table_Name,Argument,whereclause)
+
     }
 
     fun NewQuestionID(CourseCode: Int,Lessonnumber:Int): Int {
@@ -189,15 +246,15 @@ class Controller {
         mCount.moveToFirst()
 
         val maxID = mCount.getInt(0)
-
         mCount.close()
+
 
         return maxID + 1
     }
 
     fun NewAnswerID(CourseCode: Int,Lessonnumber:Int,questionnumber:Int): Int {
 
-        val query = ("select max( " + Answers.Column_Question_Num
+        val query = ("select max( " + Answers.Column_Answer_Num
                 + " ) from " + Answers.Table_Name + " Where " + Answers.Column_Course_Code + " = ? and "+Answers.Column_Lesson_Num+" =? and "+Answers.Column_Question_Num+" =? ")
         val arguments = arrayOf(CourseCode.toString(),Lessonnumber.toString(),questionnumber.toString())
 
@@ -221,7 +278,7 @@ class Controller {
     }
     fun ARating(coursenum:String,Lessonnum:String,Questionnum:String,Answernum:String):Int
     {
-        var query="Select Sum( "+USER_VOTE_ANSWERS.Column_Rating+" ) from "+USER_VOTE_ANSWERS.Table_Name+" where "+USER_VOTE_ANSWERS.Column_Course_Code+" =? and "+USER_VOTE_ANSWERS.Column_Lesson_Num+" =?  and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? "
+        var query="Select Sum( "+USER_VOTE_ANSWERS.Column_Rating+" ) from "+USER_VOTE_ANSWERS.Table_Name+" where "+USER_VOTE_ANSWERS.Column_Course_Code+" =? and "+USER_VOTE_ANSWERS.Column_Lesson_Num+" =?  and "+USER_VOTE_ANSWERS.Column_Question_Num+" =? and "+USER_VOTE_ANSWERS.Column_Answer_Num+" =? "
         var argument= arrayOf(coursenum,Lessonnum,Questionnum,Answernum)
         var cursor=  db!!.Select(query,argument)
         cursor.moveToFirst()
@@ -303,8 +360,26 @@ class Controller {
         contentvalues.put(USER_VOTE_ANSWERS.Column_Rating,rating)
         contentvalues.put(USER_VOTE_ANSWERS.Column_Answer_Num,Answernum)
         return  db!!.insert(USER_VOTE_ANSWERS.Table_Name,contentvalues)
+    }
+    fun DeleteLesson(CC:Int,LN: Int):Boolean
+    {
+        var whereclause=Lesson.Column_Course_Code+" =? and "+Lesson.Column_Lesson_Num+" =? "
+        var Argument= arrayOf(CC.toString(),LN.toString())
+        return db!!.delete(Lesson.Table_Name,Argument,whereclause)
+    }
+   fun DeleteCourse(CC:Int):Boolean
+   {
+       var whereclause=Course.Column_Code+" =?"
+       var Argument= arrayOf(CC.toString())
+       return db!!.delete(Course.Table_Name,Argument,whereclause)
+
+   }
+    fun UNSubscribeCourse(CC:Int,SE:String):Boolean
+    {
+        var whereclause=STUD_COURSE.Column_Course_Code+" =? and "+STUD_COURSE.Column_Stud_ID+" =? "
+        var Argument= arrayOf(CC.toString(),SE)
+        return db!!.delete(STUD_COURSE.Table_Name,Argument,whereclause)
 
     }
-
 
 }

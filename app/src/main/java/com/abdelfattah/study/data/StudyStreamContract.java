@@ -89,8 +89,8 @@ public final class StudyStreamContract {
         public static final String Column_Date = "Date";
         public static final String Column_Content = "Content";
         public static final String Column_Title = "Title";
-        public static final String Column_Up_Vote = "Up_Vote";
-        public static final String Column_Down_Vote = "Down_Vote";
+      //  public static final String Column_Up_Vote = "Up_Vote";
+     //   public static final String Column_Down_Vote = "Down_Vote";
         public static final String Column_User_ID = "User_ID";
 
     }

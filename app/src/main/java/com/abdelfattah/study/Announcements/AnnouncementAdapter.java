@@ -13,9 +13,9 @@ import com.abdelfattah.study.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnouncementAdapter extends ArrayAdapter<AnnouncementData> {
+public class AnnouncementAdapter extends ArrayAdapter<AnnData> {
 
-    public AnnouncementAdapter(Context context, ArrayList<AnnouncementData> announcementList)
+    public AnnouncementAdapter(Context context, ArrayList<AnnData> announcementList)
     {
         super(context,0,announcementList);
     }
@@ -23,7 +23,7 @@ public class AnnouncementAdapter extends ArrayAdapter<AnnouncementData> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AnnouncementData Item = getItem(position);
+        AnnData Item = getItem(position);
         View ListItemView = convertView;
         if(ListItemView == null)
         {
@@ -32,6 +32,9 @@ public class AnnouncementAdapter extends ArrayAdapter<AnnouncementData> {
         }
         TextView title = (TextView)ListItemView.findViewById(R.id.Announcement_Ticket_Title);
         title.setText(Item.GetTitle());
+        TextView content = (TextView)ListItemView.findViewById(R.id.Announcement_Ticket_Content);
+        content.setText(Item.GetContent());
+
         return  ListItemView;
     }
 }

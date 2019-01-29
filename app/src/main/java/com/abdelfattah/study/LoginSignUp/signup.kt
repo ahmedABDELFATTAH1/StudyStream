@@ -22,6 +22,13 @@ class signup : AppCompatActivity() {
         supportActionBar!!.title="SIGN UP"
         Doctorinfo.email="Unknown"
         Studentinfo.Studentemail="Unknown"
+      //  controller!!.enable()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Doctorinfo.email="Unknown"
+        Studentinfo.Studentemail="Unknown"
     }
 
     fun signupevent(view:View)
@@ -32,18 +39,23 @@ class signup : AppCompatActivity() {
         var firstname:String=fnametxt.text.toString()
         var secondname:String=snametxt.text.toString()
         var pass:String=passtxt.text.toString()
-        var passagain:String=repasstxt.text.toString()
-        if(!Doctor && !student)
+        var passagain:String=repasstxt.text.toString()//take all data
+        if(!Doctor && !student)//check if they chose a student or doctor
         {
             Toast.makeText(this,"Please chose student or doctor",Toast.LENGTH_SHORT).show()
            return
         }
-        else if(email==""||firstname==""||secondname==""||pass!=passagain)
+        else if(email==""||firstname==""||secondname==""||pass!=passagain)//check if they insert all fields
         {
             Toast.makeText(this,"enter all data and make sure password is match",Toast.LENGTH_SHORT).show()
             return
         }
-         var success=controller!!.insertuser(Doctor,email,firstname,secondname,pass)
+        if(email.length>15||pass.length>15||firstname.length>15||secondname.length>15)
+        {
+            Toast.makeText(this,"Any info cannot exceed 15 characters",Toast.LENGTH_SHORT).show()
+            return
+        }
+        var success=controller!!.insertuser(Doctor,email,firstname,secondname,pass)//insert user
         if(success)
         {
 
@@ -53,16 +65,21 @@ class signup : AppCompatActivity() {
                 Doctorinfo.Fname=firstname
                 Doctorinfo.password=pass
                 Doctorinfo.Secondname=secondname
+                PickedUser.Doctor=true;
+                PickedUser.ID=Doctorinfo.email
                 var intent = Intent(this, TheDoctor::class.java)
-                startActivity(intent)
+                startActivity(intent)//if doctor go to doctor activity
             }
             else{
                 Studentinfo.Studentemail= email
                 Studentinfo.StudentFname=firstname
                 Studentinfo.password=pass
                 Studentinfo.Secondname=secondname
+                PickedUser.Doctor=false;
+                PickedUser.ID=Studentinfo.Studentemail
+
                 var intent = Intent(this, TheStudent::class.java)
-                startActivity(intent)
+                startActivity(intent)//if student go to student activity
 
             }
 

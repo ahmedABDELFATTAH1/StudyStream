@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
 import android.widget.Toast
 import com.abdelfattah.study.LESSONS.Pickedlesson
 import com.abdelfattah.study.LoginSignUp.Doctorinfo
@@ -36,7 +37,6 @@ var listOfAnswers:ArrayList<Answerdata>?=null
         getAnswers()
         adapter= AnswerAdabterlist()
         AnswersList.adapter=adapter
-        adapter!!.notifyDataSetChanged()
         if(Doctorinfo.email!="Unknown")
         {
             useremail= Doctorinfo.email
@@ -52,7 +52,6 @@ var listOfAnswers:ArrayList<Answerdata>?=null
         super.onRestart()
         getAnswers()
         adapter!!.notifyDataSetChanged()
-
 
     }
 
@@ -77,38 +76,117 @@ var listOfAnswers:ArrayList<Answerdata>?=null
             var  contentt=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Answers.Column_Content))
             var  title=cursor.getString(cursor.getColumnIndex(StudyStreamContract.Answers.Column_Title))
             var Answernaumber=cursor.getInt(cursor.getColumnIndex(StudyStreamContract.Answers.Column_Answer_Num))
-            Isnotempty=cursor.moveToNext()
             var rating=controller!!.ARating(coursenumm.toString(),lessonnumm.toString(),questionnum.toString(),Answernaumber.toString())
-          listOfAnswers!!.add(Answerdata(questionnum,Answernaumber,lessonnumm,coursenumm,studentid,TheDate,contentt,title,rating))
+            listOfAnswers!!.add(Answerdata(questionnum,Answernaumber,lessonnumm,coursenumm,studentid,TheDate,contentt,title,rating))
+            Isnotempty=cursor.moveToNext()
         }
+        sortlist()
+
+
+
+    }
+fun sortlist()
+    {
+        var max=0
+        for (i in 0..listOfAnswers!!.count()-1)
+        {
+            for(j in i+1..listOfAnswers!!.count()-1)
+            {
+                if (listOfAnswers!![j].Rating>listOfAnswers!![max].Rating)
+                {
+                    max =j
+                }
+
+            }
+            swap(i,max)
+            max =i+1
+        }
+
+
+
 
     }
 
+    fun swap(j:Int,max:Int)
+    {
+         var maxtitle=listOfAnswers!![max].titlee
+         var maxcon=listOfAnswers!![max].conten
+        var maxuser=listOfAnswers!![max].Userid
+        var maxdate=listOfAnswers!![max].TheDate
+        var maxrate=listOfAnswers!![max].Rating
+        var maxln=listOfAnswers!![max].lessonnum
+        var maxcn=listOfAnswers!![max].coursenum
+        var qn=listOfAnswers!![max].questionnum
+        var maxan=listOfAnswers!![max].Answernum
+        ///////////////////////////////////////////////
+        listOfAnswers!![max].titlee=listOfAnswers!![j].titlee
+        listOfAnswers!![max].conten=listOfAnswers!![j].conten
+        listOfAnswers!![max].Userid=listOfAnswers!![j].Userid
+        listOfAnswers!![max].TheDate=listOfAnswers!![j].TheDate
+        listOfAnswers!![max].Answernum=listOfAnswers!![j].Answernum
+        listOfAnswers!![max].lessonnum=listOfAnswers!![j].lessonnum
+        listOfAnswers!![max].coursenum=listOfAnswers!![j].coursenum
+        listOfAnswers!![max].questionnum=listOfAnswers!![j].questionnum
+        listOfAnswers!![max].Rating=listOfAnswers!![j].Rating
+        //////////////////
+        listOfAnswers!![j].titlee=maxtitle
+        listOfAnswers!![j].conten=maxcon
+        listOfAnswers!![j].Userid=maxuser
+        listOfAnswers!![j].TheDate=maxdate
+        listOfAnswers!![j].Rating=maxrate
+        listOfAnswers!![j].lessonnum=maxln
+        listOfAnswers!![j].coursenum=maxcn
+        listOfAnswers!![j].questionnum=qn
+        listOfAnswers!![j].Answernum=maxan
+
+    }
 
 
     inner class AnswerAdabterlist(): BaseAdapter()
     {
 
+
+
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
             var myview=layoutInflater.inflate(R.layout.answerticket,null)
+
             var currentAnswer= listOfAnswers!![position]
             myview.titletext.text=currentAnswer.titlee
             myview.contenttext.text=currentAnswer.conten
             myview.datetext.text=currentAnswer.TheDate
             myview.useridtext.text=currentAnswer.Userid
             myview.RateText.text=currentAnswer.Rating.toString()
-          myview.Upvotebtn.setOnClickListener {
+            if(currentAnswer.Rating>0)
+            {
+                myview.RateText.setTextColor(Color.BLUE)
+            }
+            if(currentAnswer.Rating<0)
+            {
+                myview.RateText.setTextColor(Color.RED)
+
+            }
+
+            var thereA=controller!!.getAnswerbyuser(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,currentAnswer.Answernum, useremail!!)
+            if(Doctorinfo.email=="Unknown"&&!thereA)
+            {
+                myview.ADeletebtn.visibility=View.GONE
+            }
+            myview.ADeletebtn.setOnClickListener {
+
+                controller!!.DelteAnswer(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,currentAnswer.Answernum)
+                getAnswers()
+                notifyDataSetChanged()
+            }
+            myview.Upvotebtn.setOnClickListener {
               if(controller!!.Aisalreadyrate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail.toString(),currentAnswer.Answernum.toString()))
               {
 
                   var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,rating!!,currentAnswer.Answernum.toString())
                   if(success)
                   {
-                    var rat=  myview.RateText.text.toString().toInt()
-                     rat+=rating!!*2
-                      myview.RateText.text=rat.toString()
+                      getAnswers()
                       notifyDataSetChanged()
-
                   }
 
               }
@@ -117,9 +195,7 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                   var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,rating!!,currentAnswer.Answernum)
                   if(success)
                   {
-                      var rat=  myview.RateText.text.toString().toInt()
-                      rat+=rating!!*2
-                      myview.RateText.text=rat.toString()
+                      getAnswers()
                       notifyDataSetChanged()
 
                   }
@@ -136,6 +212,9 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,0!!,currentAnswer.Answernum.toString())
                     if(success)
                     {
+                        getAnswers()
+                        notifyDataSetChanged()
+
 
                     }
 
@@ -145,6 +224,9 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,0!!,currentAnswer.Answernum)
                     if(success)
                     {
+                        getAnswers()
+                        notifyDataSetChanged()
+
 
                     }
 
@@ -159,10 +241,10 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success=  controller!!.Aupdaterate(currentAnswer.coursenum.toString(),currentAnswer.lessonnum.toString(),currentAnswer.questionnum.toString(),useremail!!,-rating!!,currentAnswer.Answernum.toString())
                     if(success)
                     {
-                        var rat=  myview.RateText.text.toString().toInt()
-                        rat-=rating!!*2
-                        myview.RateText.text=rat.toString()
+
+                        getAnswers()
                         notifyDataSetChanged()
+
 
                     }
 
@@ -172,17 +254,17 @@ var listOfAnswers:ArrayList<Answerdata>?=null
                     var success= controller!!.Ainsertnewrate(currentAnswer.coursenum,currentAnswer.lessonnum,currentAnswer.questionnum,useremail!!,-rating!!,currentAnswer.Answernum)
                     if(success)
                     {
-                        var rat=  myview.RateText.text.toString().toInt()
-                        rat-=rating!!*2
-                        myview.RateText.text=rat.toString()
+                        getAnswers()
                         notifyDataSetChanged()
+
+
                     }
 
                 }
 
             }
             myview.setOnClickListener {
-                Toast.makeText(baseContext,"الحمد لله الذي هدانا لهذا وما كنا لنهتدي لولا ان هدانا الله",Toast.LENGTH_SHORT).show()
+
             }
             return myview
         }

@@ -1,31 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/edittext_roundedcorners"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/ctitle"
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/course" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coursetitle" />
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/cdisc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CourseDisc" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/ccode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CourseCode" />
+            <TextView
+                android:id="@+id/ctitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Course Title"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/cpass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CoursePass" />
 
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/ccode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Course Code"
+            android:textStyle="italic"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/cpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textStyle="italic"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/cdisc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Course Disc"
+            android:textColor="@color/middlegrey"
+            android:layout_marginLeft="5dp" />
+
+
+    </LinearLayout>
 </LinearLayout>
