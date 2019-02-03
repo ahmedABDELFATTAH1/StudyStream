@@ -67,7 +67,7 @@
             android:id="@+id/AddCbtn"
             style="@style/ListViewButton"
             android:onClick="ADDCOURSEEVENT"
-            android:text="AddCourse" />
+            android:text="Add a Course" />
 
         <ListView
             android:id="@+id/DCourseList"

@@ -7,15 +7,16 @@
     tools:context=".CourseMainMenu.Fragments.Materials">
 
     <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/Show_Top_Students"
+        style="@style/ListViewButton"
+        android:layout_marginBottom="0dp"
+        android:text="Course Top Students" />
 
     <Button
         android:id="@+id/AddLesson"
         style="@style/ListViewButton"
-        android:text="Add a new Lesson" />
-    <Button
-        android:id="@+id/Show_Top_Students"
-        style="@style/ListViewButton"
-        android:text="Top Students" />
+        android:text="Add a new Lesson"/>
 
     <ListView
         android:id="@+id/LessontList"

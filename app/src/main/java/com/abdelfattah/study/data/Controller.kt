@@ -177,7 +177,7 @@ class Controller {
         return   cursor.getString(0)
        }catch (e:Exception){}
 
-           return "You can add Bio here"
+           return "Oops! No Bio Added Yet."
    }
 
 

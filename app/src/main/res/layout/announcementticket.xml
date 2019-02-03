@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/edittext_roundedcorners"
     android:padding="10dp">
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="5dp"
         android:src="@drawable/announcement"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
         <TextView
             android:id="@+id/Announcement_Ticket_Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Announcement title."
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
             android:textSize="20sp" />
         <TextView
             android:id="@+id/Announcement_Ticket_Content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Announcement title."
-
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp" />
+            android:text="Announcement text."
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

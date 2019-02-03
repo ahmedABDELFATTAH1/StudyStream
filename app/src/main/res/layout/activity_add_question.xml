@@ -29,7 +29,7 @@
             <EditText
                 android:id="@+id/Qaddtitle"
                 style="@style/EditTextStyle"
-                android:hint="Question's title"
+                android:hint="Question's title."
                 android:inputType="textPersonName"
                 android:maxLines="1" />
 
@@ -40,7 +40,7 @@
             <EditText
                 android:id="@+id/Qaddcontent"
                 style="@style/EditTextStyle"
-                android:hint="Enter your question here"
+                android:hint="Enter your question here."
                 android:inputType="textMultiLine"
                 android:maxLines="8"
                 android:minLines="4" />

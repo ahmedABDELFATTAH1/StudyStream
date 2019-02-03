@@ -48,15 +48,24 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
                 <Button
                     android:id="@+id/Edit_Material_Update"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_width="100dp"
                     style="@style/Button"
                     android:onClick="UpdateMaterial"
                     android:text="Update" />
+
                 <Button
                     android:id="@+id/Edit_Material_Delete"
                     style="@style/Button"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="100dp"
                     android:onClick="DeleteMaterial"
                     android:text="Delete" />
 
